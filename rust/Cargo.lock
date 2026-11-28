@@ -4,11 +4,11 @@ version = 4
 
 [[package]]
 name = "acre2_dsp"
-version = "0.1.0"
+version = "3.0.0"
 
 [[package]]
 name = "acre2_ext"
-version = "0.1.0"
+version = "3.0.0"
 dependencies = [
  "acre2_dsp",
  "acre2_signal",
@@ -29,7 +29,7 @@ dependencies = [
 
 [[package]]
 name = "acre2_signal"
-version = "0.1.0"
+version = "3.0.0"
 dependencies = [
  "thiserror 2.0.21",
  "tracing",
@@ -38,7 +38,7 @@ dependencies = [
 
 [[package]]
 name = "acre2_tools"
-version = "0.1.0"
+version = "3.0.0"
 dependencies = [
  "acre2_signal",
  "anyhow",
@@ -48,7 +48,7 @@ dependencies = [
 
 [[package]]
 name = "acre2_voice_client"
-version = "0.1.0"
+version = "3.0.0"
 dependencies = [
  "acre2_voice_codec",
  "acre2_voice_net",
@@ -67,7 +67,7 @@ dependencies = [
 
 [[package]]
 name = "acre2_voice_codec"
-version = "0.1.0"
+version = "3.0.0"
 dependencies = [
  "bytes",
  "opusic-c",
@@ -76,7 +76,7 @@ dependencies = [
 
 [[package]]
 name = "acre2_voice_net"
-version = "0.1.0"
+version = "3.0.0"
 dependencies = [
  "bytes",
  "quinn",
@@ -87,7 +87,7 @@ dependencies = [
 
 [[package]]
 name = "acre2_voice_proto"
-version = "0.1.0"
+version = "3.0.0"
 dependencies = [
  "bytes",
  "postcard",
@@ -98,7 +98,7 @@ dependencies = [
 
 [[package]]
 name = "acre2_voice_server"
-version = "0.1.0"
+version = "3.0.0"
 dependencies = [
  "acre2_voice_net",
  "acre2_voice_proto",
@@ -121,7 +121,7 @@ dependencies = [
 
 [[package]]
 name = "acre2_voice_testkit"
-version = "0.1.0"
+version = "3.0.0"
 dependencies = [
  "acre2_voice_client",
  "acre2_voice_codec",

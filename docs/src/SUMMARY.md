@@ -57,6 +57,7 @@
     - [Building the Extension](development/building-extensions.md)
     - [SQF Coding Guidelines](development/coding-guidelines-sqf.md)
     - [Translating](development/translating.md)
+    - [Releasing](development/releasing.md)
     - [Documentation](development/documentation.md)
     - [Tips and Tricks](development/tips-and-tricks.md)
 

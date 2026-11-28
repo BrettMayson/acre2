@@ -1,0 +1,34 @@
+# Steam Workshop metadata for `hemtt publish` (paths are relative to the repository root).
+# Lists replace what's on the Workshop; leave one out to keep what's there, `[]` clears it.
+# See https://brettmayson.github.io/yard/development/releasing.html
+
+title = "YARD - Radio and Voice"
+description = "workshop/description.md"
+changelog = "CHANGELOG.md"
+language = "english"
+visibility = "public"
+
+# Exact Steam tag names (unknown tags are silently dropped).
+tags = [
+    "Mod",
+    "Equipment",
+    "Mechanics",
+    "Sound",
+    "Server",
+    "Multiplayer",
+]
+
+preview = "workshop/preview.png"
+
+required_items = [
+    "450814997", # CBA_A3
+]
+
+additional_previews = [
+    { type = "image", path = "workshop/gallery/an-prc-152.jpg" },
+    { type = "image", path = "workshop/gallery/an-prc-148.jpg" },
+    { type = "image", path = "workshop/gallery/an-prc-343.jpg" },
+    { type = "image", path = "workshop/gallery/an-prc-117f.jpg" },
+    { type = "image", path = "workshop/gallery/an-prc-77.jpg" },
+    { type = "image", path = "workshop/gallery/sem-70.jpg" },
+]

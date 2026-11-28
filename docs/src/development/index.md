@@ -6,6 +6,7 @@ Working on YARD itself.
 - [Building the Extension](building-extensions.md): the Rust extension and tools.
 - [SQF Coding Guidelines](coding-guidelines-sqf.md)
 - [Translating](translating.md)
+- [Releasing](releasing.md): GitHub releases and the Steam Workshop (`hemtt publish`).
 - [Documentation](documentation.md): this site.
 - [Tips and Tricks](tips-and-tricks.md)
 

@@ -5,6 +5,12 @@
 
 #include "\idi\acre\addons\main\script_version.hpp"
 
+// Versions are MAJOR.MINOR.PATCHLVL: `hemtt publish` matches CHANGELOG.md entries by that, and
+// its changelog parser only accepts three-part versions. BUILD stays for the version macros.
+#ifndef BUILD
+    #define BUILD 0
+#endif
+
 #define VERSION         MAJOR.MINOR
 #define VERSION_STR     MAJOR.MINOR.PATCHLVL.BUILD
 #define VERSION_AR      MAJOR,MINOR,PATCHLVL,BUILD

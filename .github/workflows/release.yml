@@ -5,9 +5,9 @@ name: Release
 #
 # - Any run (manual or tag) uploads the packaged mod as a workflow artifact.
 # - A `v*` tag also creates a draft GitHub release with the zip and symbols attached.
-# - A `v*` tag uploads to the Steam Workshop when the repository variable WORKSHOP_ID is set,
-#   using the STEAM_USERNAME / STEAM_PASSWORD secrets (the account must not need Steam Guard
-#   codes for each login). Create the Workshop item once by hand first to get its ID.
+#
+# The Steam Workshop is updated with `hemtt publish` from a machine running Steam, not here:
+# see https://brettmayson.github.io/yard/development/releasing.html
 #
 # The DLLs are not BattlEye-signed.
 
@@ -137,14 +137,3 @@ jobs:
         files: |
           yard_${{ env.VERSION }}.zip
           yard_${{ env.VERSION }}_symbols.zip
-    - name: Upload to Steam Workshop
-      if: startsWith(github.ref, 'refs/tags/v') && vars.WORKSHOP_ID != ''
-      uses: arma-actions/workshop-upload@v1
-      with:
-        appId: '107410'
-        itemId: ${{ vars.WORKSHOP_ID }}
-        contentPath: '@yard'
-        changelog: 'Version ${{ env.VERSION }} - See changelog on GitHub: https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}'
-      env:
-        STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
-        STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
