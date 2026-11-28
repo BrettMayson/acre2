@@ -11,6 +11,7 @@ name = "acre2_ext"
 version = "0.1.0"
 dependencies = [
  "acre2_dsp",
+ "acre2_signal",
  "acre2_voice_client",
  "acre2_voice_codec",
  "acre2_voice_proto",
@@ -24,6 +25,25 @@ dependencies = [
  "tokio",
  "tracing",
  "tracing-subscriber",
+]
+
+[[package]]
+name = "acre2_signal"
+version = "0.1.0"
+dependencies = [
+ "thiserror 2.0.21",
+ "tracing",
+ "windows-sys 0.61.2",
+]
+
+[[package]]
+name = "acre2_tools"
+version = "0.1.0"
+dependencies = [
+ "acre2_signal",
+ "anyhow",
+ "base64 0.22.1",
+ "clap",
 ]
 
 [[package]]

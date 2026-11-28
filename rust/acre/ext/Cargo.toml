@@ -1,6 +1,6 @@
 [package]
 name = "acre2_ext"
-description = "ACRE Arma 3 voice extension (acre_voice_x64): voice client and server authority"
+description = "The YARD Arma 3 extension (yard_x64): voice client, hosted voice server and authority, radio signal propagation"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
@@ -8,11 +8,12 @@ repository.workspace = true
 rust-version.workspace = true
 
 [lib]
-name = "acre_voice"
+name = "yard"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 acre2_dsp = { workspace = true, optional = true }
+acre2_signal = { workspace = true }
 anyhow = { workspace = true }
 acre2_voice_client = { workspace = true }
 acre2_voice_codec = { workspace = true, optional = true }

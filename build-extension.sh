@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Builds the voice extension on Linux and copies it to the repo root for `hemtt release`:
-#   acre_voice_x64.dll  Windows clients and servers (cross-compiled with mingw)
-#   acre_voice_x64.so   Linux dedicated servers (no audio devices)
+# Builds the extension on Linux and copies it to the repo root for `hemtt release`:
+#   yard_x64.dll         Windows clients and servers (cross-compiled with mingw)
+#   yard_x64.so          Linux dedicated servers (no audio devices)
+#   extras/wav2b64.exe   the sound conversion tool (with windows)
 #
 # Usage: ./build-extension.sh [windows|linux|all]   (default: all)
 #
@@ -23,17 +24,18 @@ build_windows() {
     need x86_64-w64-mingw32-gcc "Install mingw (e.g. sudo dnf install mingw64-gcc)"
     rustup target list --installed | grep -qx x86_64-pc-windows-gnu ||
         rustup target add x86_64-pc-windows-gnu
-    echo "==> Building acre_voice_x64.dll (Windows)"
-    (cd "$root/rust" && cargo build --release -p acre2_ext \
+    echo "==> Building yard_x64.dll (Windows)"
+    (cd "$root/rust" && cargo build --release -p acre2_ext -p acre2_tools \
         --target x86_64-pc-windows-gnu --features acre2_voice_codec/bundled)
-    cp "$root/rust/target/x86_64-pc-windows-gnu/release/acre_voice.dll" "$root/acre_voice_x64.dll"
+    cp "$root/rust/target/x86_64-pc-windows-gnu/release/yard.dll" "$root/yard_x64.dll"
+    cp "$root/rust/target/x86_64-pc-windows-gnu/release/wav2b64.exe" "$root/extras/wav2b64.exe"
 }
 
 build_linux() {
-    echo "==> Building acre_voice_x64.so (Linux server)"
+    echo "==> Building yard_x64.so (Linux server)"
     (cd "$root/rust" && cargo build --release -p acre2_ext \
         --no-default-features --features acre2_voice_codec/bundled)
-    cp "$root/rust/target/release/libacre_voice.so" "$root/acre_voice_x64.so"
+    cp "$root/rust/target/release/libyard.so" "$root/yard_x64.so"
 }
 
 case "$target" in
@@ -44,5 +46,5 @@ case "$target" in
 esac
 
 echo "==> Done:"
-ls -l "$root"/acre_voice_x64.* 2>/dev/null
+ls -l "$root"/yard_x64.* 2>/dev/null
 echo "Now run: hemtt release"

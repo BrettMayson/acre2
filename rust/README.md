@@ -1,6 +1,6 @@
-# ACRE Rust workspace
+# YARD Rust workspace
 
-ACRE's voice: a game-agnostic voice library and the Arma extension built on it, replacing the TeamSpeak 3 plugin. See [../plan.md](../plan.md) for the design, decisions and status, and [the voice server docs](../docs/wiki/user/voice-server.md) for setup.
+YARD's extension and the libraries it's built on: a game-agnostic voice library (replacing the TeamSpeak 3 plugin) and ACRE's radio signal propagation (replacing the C++ signal extension). See [../plan.md](../plan.md) for the design, decisions and status, and [the voice server docs](../docs/wiki/user/voice-server.md) for setup.
 
 | Crate | Path | |
 |---|---|---|
@@ -11,7 +11,9 @@ ACRE's voice: a game-agnostic voice library and the Arma extension built on it, 
 | `acre2_voice_codec` | `voice/codec` | Opus encoding/decoding, adaptive jitter buffer, FEC/PLC |
 | `acre2_voice_testkit` | `voice/testkit` | Test harness, end-to-end/audio/load tests, `acre2_voice_cli` |
 | `acre2_dsp` | `acre/dsp` | ACRE's radio, babel, volume and positional effects (golden-tested against the original C++) |
-| `acre2_ext` | `acre/ext` | The Arma extension `acre_voice_x64.dll` / `.so`: player voice client, and on the server the hosted voice server + authority |
+| `acre2_signal` | `acre/signal` | Terrain (WRP/PBO loading), antenna patterns and the propagation models (golden-tested against the original C++) |
+| `acre2_ext` | `acre/ext` | The Arma extension `yard_x64.dll` / `.so`: player voice client, on the server the hosted voice server + authority, and signal strength (`signal:*`) |
+| `acre2_tools` | `acre/tools` | `wav2b64` (sounds) and `fakewrp` (terrain files for unreadable WRPs) |
 
 The `voice/*` crates know nothing about ACRE or Arma.
 
@@ -24,12 +26,13 @@ Linux needs the ALSA and libopus development packages (`libasound2-dev libopus-d
 ```sh
 cargo test --workspace --features acre2_voice_testkit/devices
 cargo clippy --workspace --all-targets --features acre2_voice_testkit/devices
-cargo build --release -p acre2_ext --features acre2_voice_codec/bundled   # → acre_voice.dll, ship as acre_voice_x64.dll
+cargo build --release -p acre2_ext --features acre2_voice_codec/bundled   # → yard.dll, ship as yard_x64.dll
 cargo build --release -p acre2_ext --no-default-features                 # Linux dedicated server, no audio devices
 
 RUST_LOG=debug cargo test -p acre2_voice_testkit                            # with logs
 cargo test --release -p acre2_voice_testkit --test load -- --ignored --nocapture
 acre/dsp/reference/generate.sh                                              # regenerate DSP golden files (needs g++)
+acre/signal/reference/generate.sh                                           # regenerate signal golden files (needs g++ and the C++ from git history)
 ```
 
 ## Trying voice without Arma

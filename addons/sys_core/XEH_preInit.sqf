@@ -57,6 +57,7 @@ DGVAR(spectatorSpeakers) = [];
 DGVAR(godSpeakers) = [];
 
 DGVAR(threadedExtCalls) = [];
+DGVAR(threadedExtFree) = [];
 
 DGVAR(nearRadios) = [];
 
@@ -148,19 +149,19 @@ for "_i" from 1 to (_m/2) do {
     };
 };
 
+// Results of background signal commands (fnc_callExt): [slot, result].
 addMissionEventHandler ["ExtensionCallback", {
     params ["_name", "_function", "_data"];
-    if (_name != "ACRE_TR") exitWith {};
-    (parseSimpleArray _data) params ["_id", "_args"];
+    if (_name != SIGNAL_CALLBACK_NAME) exitWith {};
+    (parseSimpleArray _data) params ["_id", "_result"];
     TRACE_3("ExtensionCallback",_function,_id,_data);
 
-    private _callBack = GVAR(threadedExtCalls) select _id;
+    private _callBack = GVAR(threadedExtCalls) param [_id, []];
+    GVAR(threadedExtCalls) set [_id, nil];
+    GVAR(threadedExtFree) pushBack _id;
 
-    if (IS_ARRAY(_callBack)) then {
-        if (_args isNotEqualTo []) then {
-            _args = _args select 0;
-        };
-        [_callBack select 0, _args] call (_callBack select 1);
+    if (_callBack isNotEqualTo []) then {
+        [_callBack select 0, _result] call (_callBack select 1);
     };
 }];
 

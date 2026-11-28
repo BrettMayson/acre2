@@ -22,6 +22,7 @@ Living document. Update the checkboxes and the **Decisions** / **Open questions*
 | D9 | **Any PTT always opens the mic** | Holding any push-to-talk key (direct PTT, radio PTT, intercom, Zeus, god mode) transmits regardless of the voice-activation threshold. Direct speech is also sent while a radio PTT is held, as today. Voice activation only gates direct speech when no PTT is held. |
 | D10 | **The Arma server hosts the voice server** | `["server:start", [port, address]]` binds UDP `port` in the extension and connects to it locally as the authority with a random in-memory secret, so there's no config file or secret. Port and public address come from CBA server settings (`acre_sys_server_voicePort`, default 9987, and `acre_sys_server_voiceAddress`, required) or `ACRE2_VOICE_PORT` / `ACRE2_VOICE_ADDRESS`, which take priority. |
 | D11 | **Published as its own mod, "YARD" (`@yard`)** | GPLv3 fork of ACRE2, with a "modified version of ACRE2" notice in the README and mod.cpp. Only player-facing text changes: stringtables, display names, CBA setting categories, keybind category *labels* (via `CBA_fnc_registerKeybindModPrettyName`; the IDs stay `ACRE2`), mod.cpp/CfgMods, errors, README. The API stays `acre`: prefix `idi\acre`, `acre_*` addons, functions, variables, `ACRE_*` classnames, `CfgAcreComponents`, the extension names. The env vars are `YARD_VOICE_PORT`/`YARD_VOICE_ADDRESS`/`YARD_LOG`, and the `ACRE2_*` names still work. Lives on the `yard` branch (`rust-voice` stays the upstream ACRE PR). Logo: `extras/logos/yard.svg` (the Y is an antenna on a yardstick), rendered to `yard_logo_medium_ca.paa` and `addons/main/yard_large-logo.paa`. IDI CI removed (release, docs deploy, release drafter, FTP tools fetch); `arma.yml` and `rust.yml` remain. `release.yml` (tag `v*` or manual): HEMTT release (PBOs signed as `yard_<version>`), `acre_x64.dll` + `Wav2B64.exe` (DirectX SDK June 2010 downloaded from Microsoft), voice ext for Windows + Linux, then `yard_<version>.zip`, a draft GitHub release, and a Workshop upload when the `WORKSHOP_ID` repo variable is set. To do: BattlEye whitelisting (DLLs are unsigned), creating the Workshop item and setting `meta.cpp` `publishedid`, the docs site (beyond the voice-server page), and permission for (or removal of) the files that "may not be distributed outside of ACRE2" (`compat_csla/gm/sog/spe/ws` `.fakewrp`, `sys_intercom/vic3/data`). |
+| D12 | **One extension, `yard`** (done) | The signal extension (`acre.dll`/`acre_x64.dll`) is ported to Rust and merged into the voice extension, renamed `yard_x64.dll` / `yard_x64.so` (YARD branch only). One DLL for BattlEye to whitelist, one build, no C++ or DirectX SDK. The extension name isn't part of ACRE's public API. Supersedes Q11. |
 
 ## Current architecture (what we're replacing)
 
@@ -49,7 +50,7 @@ Arma (SQF) ──callExtension "2name:a,b,c,"──► ACRE2Arma.dll ──named
 ## Target architecture (as built)
 
 ```
- Arma dedicated server: acre_voice_x64 (.dll/.so)
+ Arma dedicated server: yard_x64 (.dll/.so)
  ┌────────────────────────────────────────────────────────────┐
  │ voice server (sessions · world · subscriptions · router)    │◄── UDP port (QUIC) ──┐
  │        ▲ local QUIC, random secret                          │                      │
@@ -57,7 +58,7 @@ Arma (SQF) ──callExtension "2name:a,b,c,"──► ACRE2Arma.dll ──named
  └────────────────────────────────────────────────────────────┘                      │
       ▲ SQF (typed callExtension + ExtensionCallback); tokens to clients via CBA events  │
                                                                                          │
- Arma client: acre_voice_x64.dll                                                       │
+ Arma client: yard_x64.dll                                                             │
   · mic → voice activation/PTT → Opus → datagrams ───────────────────────────────────────┤
   · datagrams → jitter buffer → decode → ACRE DSP (per speaker, params from SQF) → mixer ◄┘
 ```
@@ -75,10 +76,12 @@ rust/
     testkit/           acre2_voice_testkit  harness, e2e/audio/load tests, acre2_voice_cli
   acre/
     dsp/               acre2_dsp            port of ACRE2Core effects (radio, babel, volume, positional)
-    ext/               acre2_ext            cdylib `acre_voice_x64` (arma-rs): voice client + hosted server/authority
+    signal/            acre2_signal         terrain, antennas, propagation models (port of the C++ signal extension)
+    ext/               acre2_ext            cdylib `yard_x64` (arma-rs): voice client + hosted server/authority + signal
+    tools/             acre2_tools          wav2b64, fakewrp
 ```
 
-The TeamSpeak C++ was removed in Phase 6; `extensions/` now only holds the signal extension (`acre_x64`).
+The TeamSpeak C++ was removed in Phase 6 and the signal extension in Phase 7: there is no C++ left.
 
 ### Library concepts (generic, no ACRE knowledge)
 
@@ -132,7 +135,7 @@ The server-side routing for radio is **frequency only** (no distance cut). The l
 
 ### Extension API (arma-rs)
 
-`"acre_voice" callExtension ["group:command", [args…]]`, typed arguments; asynchronous results and events come through `ExtensionCallback` (name `"acre_voice"`, data always an SQF array). This replaces the per-frame `sys_io` polling. Each command is documented where it's defined:
+`"yard" callExtension ["group:command", [args…]]`, typed arguments; asynchronous results and events come through `ExtensionCallback` (name `"yard"`; signal results `"YARD_SIGNAL"`, data always an SQF array). This replaces the per-frame `sys_io` polling. Each command is documented where it's defined:
 
 - Player side ([client.rs](rust/acre/ext/src/client.rs)): `voice:connect/disconnect/status`, `tx:direct/start/stop/stop_all/loopback`, `rx:channels`, `vox:settings/ptt/mute`, `self:update/positions`, `speaker:direct/radio/silence/mute`, `settings:curve_model/set/override`, `sound:load/play`, `audio:devices/select/level`. Callbacks: `connected`, `connect_failed`, `disconnected`, `remote_start`, `remote_stop`, `local_start`, `local_stop`, `server_error`, `device`.
 - Server side ([host.rs](rust/acre/ext/src/host.rs), [authority.rs](rust/acre/ext/src/authority.rs)): `server:start/stop`, `authority:connect/token/world/remove/rules/report_position/status`. Callbacks: `authority_connected`, `authority_failed`, `authority_disconnected`, `token`, `token_failed`, `peer_connected`, `peer_disconnected`, `authority_error`.
@@ -222,10 +225,17 @@ The server-side routing for radio is **frequency only** (no distance cut). The l
 - [x] Release workflow: builds `acre_voice_x64.dll` (signed with the rest) and `acre_voice_x64.so` for Linux dedicated servers (`compile-linux` job)
 - [x] Docs: [installation](docs/wiki/user/installation.md) (players), [voice server](docs/wiki/user/voice-server.md) (admins: two settings and a port), building, tips; TS channel switching page removed
 - [ ] Playtests with real groups at increasing size
-- [ ] BattlEye: confirm `acre_voice_x64.dll` (networking + audio) is accepted once signed
+- [ ] BattlEye: get `yard_x64.dll` (networking, audio, terrain file access) whitelisted
 
-### Phase 7 — Later
-- [ ] Port `acre.dll` (signal, antenna, terrain/WRP loading, signal map) to Rust and merge it with `acre_voice` into one extension; drop `acre_dynload`
+### Phase 7 — Signal extension port (YARD branch, D12)
+- [x] Inventory the C++ (`extensions/src/ACRE2Arma`): commands `load_map`, `process_signal` (async), `load_antenna`, `signal_map`, `signal_map_progress`, `signal_map_get_sample_data`; `peaks` (debug, dropped)
+- [x] [`acre2_signal`](rust/acre/signal): LZO1X + LZSS, PBO reading and indexing, WRP (`OPRW` v17+, `8WVR`) + `.fakewrp`, terrain grid and peaks, antenna gain tables, models arcade / LOS simple / LOS multipath / Longley-Rice ITM (ITWOM was disabled in SQF and is dropped)
+- [x] Golden tests ([reference/generate.sh](rust/acre/signal/reference/generate.sh) builds the C++ with g++): on the real `vn_the_bra.fakewrp` and shipped antennas, terrain heights/slopes/normals, peaks, 100 antenna gains and 120 tx/rx cases for LOS, multipath and ITM match **exactly** (0 dB)
+- [x] Terrain PBOs are found from the files the process has open, as the C++ did, but done properly: Linux `/proc/self/fd`; Windows our own handles from `SystemExtendedHandleInformation` + `GetFinalPathNameByHandleW` (no handle duplication, no `NtQueryObject`, which can hang). `getLoadedModsInfo` gives folder names rather than paths, so SQF can't supply them
+- [x] Merged into the extension, renamed `yard` (`yard_x64.dll` / `.so`); `signal:load_map/antenna/process/map/map_progress/map_sample`, results via `ExtensionCallback` name `YARD_SIGNAL` with `[slot, result]` (they carry their own `Context`, so they work before `init`). `fnc_callExt` keeps its signature; its callback slots are now reused instead of growing forever
+- [x] Signal map tool: computes in parallel and writes `userconfig\<id>.paa` itself (uncompressed ARGB8888, ≤ 1024²). The C++ wrote a PNG and shelled out to `P:\TexView2\Pal2PacE.exe`, so it only worked on IDI's machines
+- [x] Tools: [`wav2b64`](rust/acre/tools/src/bin/wav2b64.rs) (byte-identical to the repo's sounds) and [`fakewrp`](rust/acre/tools/src/bin/fakewrp.rs) (`convert` a WRP, `generate` from an in-game height dump); `extensions/`, `acre_dynload` and the DirectX/CMake CI steps are gone
+- [ ] **Run it in Arma**: terrain loading from real game PBOs (Windows handle listing), signal in game, the signal map overlay
 - [ ] Optional: server-side signal estimation for smarter radio routing
 
 ## Implementation notes
@@ -259,12 +269,21 @@ Details that later phases depend on, settled while building:
 - **Audio threads**: device callbacks only touch lock-free `rtrb` rings. A `acre2-voice-tx` thread encodes 20 ms frames; `acre2-voice-mix` renders frames to keep ~60 ms queued ahead of the speakers (or self-clocks with no output device). Control/voice from the network go through a tokio task into the mixer.
 - **Transmissions from a client**: `TxId(0)` is direct speech; keyed transmissions (radios etc.) use other ids chosen by the caller. A held key sends on its own tx *and* direct speech. Each talk spurt is a Start → frames (last with `END_OF_SPURT`) → Stop, so listeners get a fresh `TransmissionStarted` per spurt, like ACRE's `remoteStartSpeaking` today.
 
+### Signal port: behaviour changes from the C++
+
+- **ITM line-of-sight term**: `common/vector.hpp` declared placeholder `acre::cos/sin/acos` templates returning `-1`. Unqualified `cos`/`sin` in the ITM code (namespace `acre::…::itm`) found them before the real ones, so the shipped Longley-Rice model computed `A_los` with cos = sin = −1 (seen as up to ~13 dB on the golden cases). The port uses the real functions; the golden generator strips the placeholders.
+- **ITM antenna heights**: ITM takes each antenna's height above ground, transmitter first (the profile runs from the transmitter). The C++ passed `getPosASL` heights (above sea level), receiver first, so ITM counted the hills twice and treated radios as tall masts. On the golden cases the fix makes ITM a median 21 dB weaker (up to 77 dB). Heights are clamped to ITM's 0.5–3000 m (a below-ground antenna gave NaN). [reference/fix_itm_heights.py](rust/acre/signal/reference/fix_itm_heights.py) applies the same change to the C++ for the golden data.
+- **Multipath peak cache**: the C++ appended the peaks around each new transmitter position to one list and never cleared it, so results depended on what had been computed before (and it was read outside its lock). Now one cached list per transmitter position.
+- **Missing file extensions**: `load_map`/`load_antenna` appended a bare `wrp`/`aba` (giving `…altiswrp`); now `.wrp`/`.aba`.
+- **Recovered (flat) terrain**: the C++ invented one peak whose height was the map's centre coordinate; now no peaks.
+- **`fakewrp generate`** reads the heights (the C++ tool read 8 bytes, `sizeof` a pointer) and writes peaks in the `[x, height, y]` order the loader expects.
+
 ## Open questions
 
 - **Q4 — Mission-less voice**: the briefing is covered (a `briefing` channel). The lobby (before a unit exists) isn't: players connect once they have a unit.
 - **Q6 — Opus frame size**: 20 ms (robust) or 10 ms (lower latency, more overhead)? *Default: 20 ms, configurable.*
 - **Q7 — Recording/admin tools**: should the server support admin mute, kick or recording hooks?
-- **Q11 — Extension name**: the voice extension is `acre_voice_x64` because `acre_x64` is still the C++ signal extension. Merge them in Phase 7, or keep two?
+- ~~**Q11 — Extension name**~~: merged as `yard` (D12).
 - **Q12 — Positional sound**: X3DAudio's exact panning isn't public. The reimplementation follows its documented behaviour; does it sound right to people who know ACRE? (A listening test before release.)
 - **Q13 — Radio subscription updates**: polled every 0.25 s from SQF. Fast enough, or should retuning push immediately via sys_data events?
 - **Q9 — Audio outside Arma focus/alt-tab**: keep playing (TS3 behaviour)? *Default: yes.*

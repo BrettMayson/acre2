@@ -1,4 +1,4 @@
-//! Callbacks into SQF (`ExtensionCallback` with name `"acre_voice"`).
+//! Callbacks into SQF (`ExtensionCallback` with name `"yard"`).
 //!
 //! arma-rs hands out a [`Context`] per call; the `init` command parks one here so background
 //! threads can raise events.
@@ -9,7 +9,7 @@ use arma_rs::{Context, IntoArma};
 
 static CONTEXT: Mutex<Option<Context>> = Mutex::new(None);
 
-pub const NAME: &str = "acre_voice";
+pub const NAME: &str = "yard";
 
 pub fn set_context(ctx: Context) {
     *CONTEXT.lock().expect("callback lock") = Some(ctx);

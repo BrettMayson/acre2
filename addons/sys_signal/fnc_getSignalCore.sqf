@@ -40,7 +40,7 @@ if (_count == 0) then {
             _count = _count + 1;
             private _id = format ["%1_%2_%3_%4", _transmitterClass, (_txAntenna select 0), _receiverClass, (_rxAntenna select 0)];
             [
-                "process_signal",
+                "process",
                 [
                     _model,
                     _id,
@@ -53,8 +53,6 @@ if (_count == 0) then {
                     _f,
                     _mW,
                     GVAR(terrainScaling),
-                    diag_tickTime,
-                    ACRE_SIGNAL_DEBUGGING,
                     GVAR(omnidirectionalRadios)
                 ],
                 2,

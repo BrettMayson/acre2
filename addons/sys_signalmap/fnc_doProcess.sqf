@@ -125,7 +125,7 @@ with uiNamespace do {
         with missionNamespace do {
             //IGNORE_PRIVATE_WARNING ["_args"];
             [
-                "signal_map",
+                "map",
                 _args,
                 true,
                 {
@@ -158,7 +158,7 @@ with uiNamespace do {
                     private _res = [1,1];
                     with missionNamespace do {
                         //IGNORE_PRIVATE_WARNING ["_res"];
-                        _res = ["signal_map_progress", ""] call EFUNC(sys_core,callExt);
+                        _res = ["map_progress", []] call EFUNC(sys_core,callExt);
                     };
                     diag_log text format["res: %1", _res];
                     private _p = 0;

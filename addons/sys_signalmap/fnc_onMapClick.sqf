@@ -48,11 +48,11 @@ with uiNamespace do {
     if (_indexOffset select 0 < _extents select 0 && _indexOffset select 1 < _extents select 1) then {
         // player sideChat format["found: %1", _indexOffset];
 
-        private _args = [_id, _indexOffset select 0, _indexOffset select 1, _extents select 0, _extents select 1];
+        private _args = [_id, _indexOffset select 0, _indexOffset select 1];
         private _result = [];
         with missionNamespace do {
             //IGNORE_PRIVATE_WARNING ["_result", "_args"];
-            _result = ["signal_map_get_sample_data", _args] call EFUNC(sys_core,callExt);
+            _result = ["map_sample", _args] call EFUNC(sys_core,callExt);
         };
         GVAR(sampleData) = [];
         if (!isNil "_result") then {

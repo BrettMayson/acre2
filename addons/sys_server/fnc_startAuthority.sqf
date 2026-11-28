@@ -27,7 +27,7 @@ if (!EGVAR(sys_io,initialized)) then {
     EGVAR(sys_io,initialized) = (["init"] call EFUNC(sys_io,ext)) != "";
 };
 if (!EGVAR(sys_io,initialized)) exitWith {
-    ERROR("The voice extension (acre_voice_x64) could not be loaded on the server.");
+    ERROR("The extension (yard_x64) could not be loaded on the server.");
 };
 
 if (isNil QGVAR(voiceStatePFH)) then {

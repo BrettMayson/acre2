@@ -8,6 +8,8 @@ members = [
     "voice/client",
     "voice/testkit",
     "acre/dsp",
+    "acre/signal",
+    "acre/tools",
     "acre/ext",
 ]
 
@@ -25,6 +27,7 @@ acre2_voice_server = { path = "voice/server" }
 acre2_voice_client = { path = "voice/client" }
 acre2_voice_codec = { path = "voice/codec" }
 acre2_dsp = { path = "acre/dsp" }
+acre2_signal = { path = "acre/signal" }
 
 anyhow = "1"
 arc-swap = "1"

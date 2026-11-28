@@ -20,7 +20,7 @@ if (!hasInterface) exitWith {};
 
 private _version = ["init"] call FUNC(ext);
 if (_version == "") exitWith {
-    ERROR_WITH_TITLE("YARD","The voice extension (acre_voice_x64) could not be loaded.");
+    ERROR_WITH_TITLE("YARD","The extension (yard_x64) could not be loaded.");
 };
 GVAR(initialized) = true;
 INFO_1("Voice extension %1 loaded.",_version);

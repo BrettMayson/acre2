@@ -47,13 +47,13 @@ jobs:
         include:
         - os: windows-latest
           target: x86_64-pc-windows-msvc
-          ext: acre_voice.dll
-          ext_out: acre_voice_x64.dll
+          ext: yard.dll
+          ext_out: yard_x64.dll
           server: acre2_voice_server.exe
         - os: ubuntu-latest
           target: x86_64-unknown-linux-gnu
-          ext: libacre_voice.so
-          ext_out: acre_voice_x64.so
+          ext: libyard.so
+          ext_out: yard_x64.so
           server: acre2_voice_server
     runs-on: ${{ matrix.os }}
     steps:

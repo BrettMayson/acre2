@@ -18,7 +18,7 @@
 
 params ["_command", ["_args", []]];
 
-("acre_voice" callExtension [_command, _args]) params ["_result", "_returnCode", "_errorCode"];
+(EXTENSION_NAME callExtension [_command, _args]) params ["_result", "_returnCode", "_errorCode"];
 
 if (_returnCode != 0 || {_errorCode != 0}) exitWith {
     WARNING_4("Voice extension call %1 %2 failed (%3): %4",_command,_args,_returnCode,_result);

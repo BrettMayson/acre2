@@ -1,0 +1,17 @@
+[package]
+name = "acre2_tools"
+description = "YARD command-line tools: wav2b64 (sounds) and fakewrp (terrain for unreadable WRPs)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+acre2_signal = { workspace = true }
+anyhow = { workspace = true }
+base64 = "0.22"
+clap = { workspace = true }
+
+[lints]
+workspace = true

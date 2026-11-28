@@ -12,7 +12,7 @@ include = [
     "LICENSE",
     "yard_logo_medium_ca.paa",
     "meta.cpp",
-    "extras/Wav2B64.exe",
+    "extras/wav2b64.exe",
     "extras/examples/**",
 ]
 

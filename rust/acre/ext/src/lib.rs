@@ -1,16 +1,14 @@
-//! ACRE's voice extension, `acre_voice_x64.dll` / `acre_voice_x64.so`.
+//! The YARD extension, `yard_x64.dll` / `yard_x64.so`.
 //!
-//! Called as `"acre_voice" callExtension ["group:command", [args…]]` with typed arguments, and
-//! answers asynchronous work through `ExtensionCallback` (name `"acre_voice"`). Call `init`
-//! first.
-//!
-//! (Separate from the `acre` extension, which still does signal propagation and terrain until
-//! that is ported too.)
+//! Called as `"yard" callExtension ["group:command", [args…]]` with typed arguments, and
+//! answers asynchronous work through `ExtensionCallback` (name `"yard"`; signal results use
+//! [`signal::CALLBACK`]). Call `init` first.
 //!
 //! - Player side ([`client`], with the `client` feature): voice connection, transmissions,
 //!   the parameters for how others sound, local sounds, audio devices.
 //! - Server side: [`host`] runs the voice server inside the Arma server, and [`authority`]
 //!   feeds it positions and issues tokens.
+//! - Both: [`signal`] loads the terrain and antennas and computes radio signal strength.
 
 // Command handlers take owned arguments and mirror the SQF argument lists.
 #![allow(clippy::needless_pass_by_value, clippy::too_many_arguments)]
@@ -24,6 +22,7 @@ pub mod meta;
 #[cfg(feature = "client")]
 pub mod render;
 mod runtime;
+pub mod signal;
 #[cfg(feature = "client")]
 mod sounds;
 #[cfg(feature = "client")]
@@ -40,7 +39,8 @@ fn init() -> Extension {
         .command("version", version)
         .command("init", init_callbacks)
         .group("authority", authority::group())
-        .group("server", host::group());
+        .group("server", host::group())
+        .group("signal", signal::group());
     #[cfg(feature = "client")]
     let ext = client::groups()
         .into_iter()

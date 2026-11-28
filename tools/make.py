@@ -72,11 +72,9 @@ dssignfile = ""
 prefix = "acre"
 pbo_name_prefix = "acre_"
 signature_blacklist = []
-importantFiles = ["yard_logo_medium_ca.paa", "meta.cpp", "mod.cpp", "LICENSE", "README.md", "acre.dll", "acre_x64.dll", "acre_voice_x64.dll"]
-extrasFiles = ["examples", "Wav2B64.exe"]
-versionFiles = ["README.md", "extensions\\src\\ACRE2Shared\\version.h", "docs\\_data\\sidebar.yml"]
-extensions32 = ["ACRE2Arma\\acre", "Extras\\Wav2B64"]
-extensions64 = ["ACRE2Arma\\acre"]
+importantFiles = ["yard_logo_medium_ca.paa", "meta.cpp", "mod.cpp", "LICENSE", "README.md", "yard_x64.dll"]
+extrasFiles = ["examples", "wav2b64.exe"]
+versionFiles = ["README.md", "docs\\_data\\sidebar.yml"]
 # be_cred_file expected to be in folder defined by enviorment variable CBA_PUBLISH_CREDENTIALS_PATH
 be_cred_filename = "acre_battleye_creds.json"
 
@@ -319,73 +317,24 @@ def print_yellow(msg):
     color("reset")
 
 
-def compile_extensions(extensions_root, force_build):
-    originalDir = os.getcwd()
-
-    print_blue("\nCompiling extensions in {}".format(extensions_root))
-
-    if shutil.which("cmake") == None:
-        print_error("Failed to find CMake!")
-        return
-
-    if shutil.which("msbuild") == None:
-        print_error("Failed to find MSBuild!")
-        return
-
-    try:
-        # 32-bit
-        if extensions32:
-            # Prepare build dirs
-            vcproj32 = os.path.join(extensions_root,"vcproj")
-            if not os.path.exists(vcproj32):
-                os.mkdir(vcproj32)
-            # Build
-            os.chdir(vcproj32)
-            subprocess.call(["cmake", "..", "-A", "Win32"])
-            print()
-            extensions32_cmd = ";".join([ext + ":rebuild" if force_build else ext for ext in extensions32])
-            subprocess.call(["msbuild", "ACRE.sln", "/m", "/t:{}".format(extensions32_cmd), "/p:Configuration=RelWithDebInfo"])
-        else:
-            print("No 32-bit extensions found.")
-
-        # 64-bit
-        if extensions64:
-            # Prepare build dirs
-            vcproj64 = os.path.join(extensions_root,"vcproj64")
-            if not os.path.exists(vcproj64):
-                os.mkdir(vcproj64)
-            # Build
-            os.chdir(vcproj64)
-            subprocess.call(["cmake", "..", "-A", "x64"])
-            print()
-            extensions64_cmd = ";".join([ext + ":rebuild" if force_build else ext for ext in extensions64])
-            subprocess.call(["msbuild", "ACRE.sln", "/m", "/t:{}".format(extensions64_cmd), "/p:Configuration=RelWithDebInfo"])
-        else:
-            print("No 64-bit extensions found.")
-    except:
-        print_error("COMPILING EXTENSIONS.")
-        raise
-    finally:
-        os.chdir(originalDir)
-
-    compile_rust_extension(os.path.dirname(extensions_root))
-
-
-def compile_rust_extension(repo_root):
-    """Builds the voice extension (rust/acre/ext) and copies it to the repo root as acre_voice_x64.dll."""
+def compile_extensions(repo_root):
+    """Builds the extension (rust/acre/ext) as yard_x64.dll in the repo root, and the
+    wav2b64 tool into extras/."""
     rust_root = os.path.join(repo_root, "rust")
-    print_blue("\nCompiling the voice extension in {}".format(rust_root))
+    print_blue("\nCompiling the extension in {}".format(rust_root))
 
     if shutil.which("cargo") == None:
         print_error("Failed to find cargo (https://rustup.rs)!")
         return
 
-    ret = subprocess.call(["cargo", "build", "--release", "-p", "acre2_ext", "--features", "acre2_voice_codec/bundled"], cwd=rust_root)
+    ret = subprocess.call(["cargo", "build", "--release", "-p", "acre2_ext", "-p", "acre2_tools", "--features", "acre2_voice_codec/bundled"], cwd=rust_root)
     if ret != 0:
-        print_error("Building the voice extension failed.")
+        print_error("Building the extension failed.")
         return
-    shutil.copy(os.path.join(rust_root, "target", "release", "acre_voice.dll"), os.path.join(repo_root, "acre_voice_x64.dll"))
-    print_green("Built acre_voice_x64.dll")
+    release = os.path.join(rust_root, "target", "release")
+    shutil.copy(os.path.join(release, "yard.dll"), os.path.join(repo_root, "yard_x64.dll"))
+    shutil.copy(os.path.join(release, "wav2b64.exe"), os.path.join(repo_root, "extras", "wav2b64.exe"))
+    print_green("Built yard_x64.dll and extras/wav2b64.exe")
 
 
 def copy_important_files(source_dir,destination_dir):
@@ -1076,7 +1025,6 @@ See the make.cfg file for additional build options.
         module_root_parent = os.path.abspath(os.path.join(os.path.join(work_drive, prefix), os.pardir))
         module_root = cfg.get(make_target, "module_root", fallback=os.path.join(make_root_parent, "addons"))
         optionals_root = os.path.join(module_root_parent, "optionals")
-        extensions_root = os.path.join(module_root_parent, "extensions")
 
         if (os.path.isdir(module_root)):
             os.chdir(module_root)
@@ -1517,7 +1465,7 @@ See the make.cfg file for additional build options.
 
     else:
         if compile_ext:
-            compile_extensions(extensions_root, force_build)
+            compile_extensions(module_root_parent)
 
         copy_important_files(module_root_parent,os.path.join(release_dir, project))
 

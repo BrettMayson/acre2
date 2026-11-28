@@ -1,0 +1,18 @@
+[package]
+name = "acre2_signal"
+description = "ACRE radio signal propagation: terrain (WRP/PBO), antennas and propagation models"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+thiserror = { workspace = true }
+tracing = { workspace = true }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_Storage_FileSystem", "Win32_System_Threading", "Wdk_System_SystemInformation"] }
+
+[lints]
+workspace = true

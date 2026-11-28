@@ -2,30 +2,39 @@
 title: Building Extensions
 ---
 
-This page describes how you can setup your extensions development environment for ACRE2, allowing you to properly build extensions with Visual Studio.
+YARD has one extension, `yard_x64.dll` (`yard_x64.so` for Linux dedicated servers), written in Rust in the `rust/` folder. It carries voice (client, and the voice server the Arma server hosts) and computes radio signal strength over the terrain. See `rust/README.md` for how the crates fit together.
 
 ## Requirements
 
-- [CMake](https://cmake.org/) (>=v3.x)
-- [Visual Studio 2017](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx) (or higher)
-- [DirectX SDK](https://www.microsoft.com/en-gb/download/details.aspx?id=6812)
+- [Rust](https://rustup.rs) (stable; the toolchain and targets are pinned in `rust/rust-toolchain.toml`)
+- [CMake](https://cmake.org/), to build the bundled Opus codec for release builds
+- Windows: the Visual Studio C++ build tools (MSVC)
+- Linux: ALSA headers (`libasound2-dev`) for the client build
 
-## Build Project (Windows)
+## Build
 
-_This is done automatically when doing a [release build](building#create-a-release-build) with `compile` option._
+_This is done automatically when doing a [release build](building#create-a-release-build) with the `compile` option._
 
-- Open a command prompt and navigate to the folder in which you downloaded or Git cloned out the ACRE2 source.
+From the `rust/` folder:
 
-### 32-bit
+```sh
+# Windows: the extension, and the wav2b64 tool shipped in extras/
+cargo build --release -p acre2_ext -p acre2_tools --features acre2_voice_codec/bundled
+# Linux dedicated server (no audio devices)
+cargo build --release -p acre2_ext --no-default-features --features acre2_voice_codec/bundled
+```
 
-- Navigate to the `extensions\vcproj` directory.
-- Run `cmake .. -A Win32` (replace generator for any other 32-bit Visual Studio generator)
-- Compile projects.
+Copy `target/release/yard.dll` to the repository root as `yard_x64.dll` (or `libyard.so` as `yard_x64.so`), and `wav2b64.exe` to `extras/`.
 
-### 64-bit
+## Tests
 
-- Navigate to the `extensions\vcproj64` directory.
-- Run `cmake .. -A x64` (replace generator for any other 64-bit Visual Studio generator)
-- Compile projects.
+```sh
+cargo test --workspace
+```
 
-Extensions files will also be copied to their appropriate locations automatically after compilation (ready for [test](building#create-a-test-build) and [release](building#create-a-release-build) builds).
+The signal propagation tests compare the Rust models with the original C++ ones on a real terrain (`rust/acre/signal/tests/golden`).
+
+## Tools
+
+- `wav2b64 input.wav [output.b64]`: converts a mono 16-bit 48 kHz WAV into a sound file for `CfgAcreSounds`.
+- `fakewrp`: makes a `.fakewrp` terrain file for terrains whose WRP the extension can't read (`fakewrp --help`).

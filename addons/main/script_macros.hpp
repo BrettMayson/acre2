@@ -1,6 +1,11 @@
 #define DEBUG_SYNCHRONOUS
 #include "\x\cba\addons\main\script_macros_common.hpp"
 
+// The extension (yard_x64.dll / yard_x64.so), and the name its ExtensionCallbacks use. Signal
+// results (sys_core_fnc_callExt) come back under their own name.
+#define EXTENSION_NAME "yard"
+#define SIGNAL_CALLBACK_NAME "YARD_SIGNAL"
+
 #define RGB_GREEN 0, 0.5, 0, 1
 #define RGB_BLUE 0, 0, 1, 1
 #define RGB_ORANGE 0.5, 0.5, 0, 1
@@ -63,7 +68,7 @@ Antenna Defines
 
 /*
 Speaking Type Defines
-SQF equivalent of extensions/src/ACRE2Shared/Types.h
+SQF equivalent of the C++ extension's Types.h (now removed)
 */
 #define SPEAKING_TYPE_DIRECT    0
 #define SPEAKING_TYPE_RADIO     1
