@@ -1,0 +1,171 @@
+name: Release
+
+# Builds the whole mod: addons (HEMTT), the signal extension (acre_x64.dll), the voice
+# extension (acre_voice_x64.dll / .so) and Wav2B64.exe, then packages @yard.
+#
+# - Any run (manual or tag) uploads the packaged mod as a workflow artifact.
+# - A `v*` tag also creates a draft GitHub release with the zip and symbols attached.
+# - A `v*` tag uploads to the Steam Workshop when the repository variable WORKSHOP_ID is set,
+#   using the STEAM_USERNAME / STEAM_PASSWORD secrets (the account must not need Steam Guard
+#   codes for each login). Create the Workshop item once by hand first to get its ID.
+#
+# The DLLs are not BattlEye-signed.
+
+on:
+  push:
+    tags:
+    - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  addons:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
+    steps:
+    - name: Checkout the source code
+      uses: actions/checkout@v6
+    - name: Setup HEMTT
+      uses: arma-actions/hemtt@v1
+    - name: Version
+      id: meta
+      run: echo "version=$(hemtt value project.version)" >> "$GITHUB_OUTPUT"
+    - name: Build (HEMTT)
+      run: hemtt release --no-archive
+    - name: Rename build folder
+      run: mv .hemttout/release .hemttout/@yard
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v6
+      with:
+        name: addons
+        path: .hemttout/@yard
+        retention-days: 1
+        include-hidden-files: true # Because .hemttout is a hidden directory
+
+  windows:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout the source code
+      uses: actions/checkout@v6
+    # The signal extension's CMake setup needs the legacy DirectX SDK (June 2010), which
+    # Microsoft still hosts. Only its headers and libraries are extracted.
+    - name: Cache DirectX SDK
+      id: dxsdk-cache
+      uses: actions/cache@v4
+      with:
+        path: dxsdk
+        key: dxsdk-jun10
+    - name: Download DirectX SDK
+      if: steps.dxsdk-cache.outputs.cache-hit != 'true'
+      run: |
+        curl.exe -fsSL -o DXSDK_Jun10.exe https://download.microsoft.com/download/A/E/7/AE743F1F-632B-4809-87A9-AA1BB3458E31/DXSDK_Jun10.exe
+        7z x DXSDK_Jun10.exe DXSDK/Include -odxsdk-tmp -y | Out-Null
+        7z x DXSDK_Jun10.exe DXSDK/Lib -odxsdk-tmp -y | Out-Null
+        Move-Item dxsdk-tmp/DXSDK dxsdk
+        Remove-Item DXSDK_Jun10.exe
+    - name: Build signal extension and Wav2B64
+      env:
+        DXSDK_DIR: ${{ github.workspace }}\dxsdk\
+      run: |
+        cmake -S extensions -B extensions/vcproj64 -A x64
+        cmake --build extensions/vcproj64 --config RelWithDebInfo --target acre Wav2B64 --parallel
+    - name: Setup Rust
+      uses: dtolnay/rust-toolchain@stable
+    - uses: Swatinem/rust-cache@v2
+      with:
+        workspaces: rust
+    - name: Build voice extension
+      env:
+        CARGO_PROFILE_RELEASE_DEBUG: limited # a usable PDB for crash dumps; the DLL is unaffected
+      run: |
+        cargo build --manifest-path rust/Cargo.toml --release -p acre2_ext --features acre2_voice_codec/bundled
+        Copy-Item rust/target/release/acre_voice.dll acre_voice_x64.dll
+        New-Item -ItemType Directory -Force symbols/x64 | Out-Null
+        if (Test-Path rust/target/release/acre_voice.pdb) {
+          Copy-Item rust/target/release/acre_voice.pdb symbols/x64/acre_voice_x64.pdb
+        }
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v6
+      with:
+        name: windows
+        path: |
+          acre_x64.dll
+          acre_voice_x64.dll
+          extras/Wav2B64.exe
+          symbols
+        retention-days: 1
+
+  linux:
+    # The voice extension for Linux dedicated servers (no audio devices needed there).
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the source code
+      uses: actions/checkout@v6
+    - name: Setup Rust
+      uses: dtolnay/rust-toolchain@stable
+    - uses: Swatinem/rust-cache@v2
+      with:
+        workspaces: rust
+    - name: Build voice extension
+      run: |
+        cargo build --manifest-path rust/Cargo.toml --release -p acre2_ext --no-default-features --features acre2_voice_codec/bundled
+        mkdir dist && cp rust/target/release/libacre_voice.so dist/acre_voice_x64.so
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v6
+      with:
+        name: linux
+        path: dist
+        retention-days: 1
+
+  package:
+    needs: [addons, windows, linux]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # draft GitHub release
+    env:
+      VERSION: ${{ needs.addons.outputs.version }}
+    steps:
+    - name: Download Artifacts
+      uses: actions/download-artifact@v7
+      with:
+        path: artifacts
+    - name: Assemble @yard
+      run: |
+        mv artifacts/addons @yard
+        cp artifacts/windows/*.dll @yard/
+        cp artifacts/linux/*.so @yard/
+        mkdir -p @yard/extras && cp artifacts/windows/extras/Wav2B64.exe @yard/extras/
+        mv artifacts/windows/symbols symbols
+        ls -la @yard
+        zip -r "yard_${VERSION}.zip" @yard
+        (cd symbols && zip -r "../yard_${VERSION}_symbols.zip" .)
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v6
+      with:
+        name: yard_${{ env.VERSION }}
+        path: |
+          yard_${{ env.VERSION }}.zip
+          yard_${{ env.VERSION }}_symbols.zip
+    - name: Draft GitHub release
+      if: startsWith(github.ref, 'refs/tags/v')
+      uses: softprops/action-gh-release@v2
+      with:
+        draft: true
+        name: YARD v${{ env.VERSION }}
+        files: |
+          yard_${{ env.VERSION }}.zip
+          yard_${{ env.VERSION }}_symbols.zip
+    - name: Upload to Steam Workshop
+      if: startsWith(github.ref, 'refs/tags/v') && vars.WORKSHOP_ID != ''
+      uses: arma-actions/workshop-upload@v1
+      with:
+        appId: '107410'
+        itemId: ${{ vars.WORKSHOP_ID }}
+        contentPath: '@yard'
+        changelog: 'Version ${{ env.VERSION }} - See changelog on GitHub: https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}'
+      env:
+        STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+        STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
