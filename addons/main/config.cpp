@@ -26,7 +26,7 @@ class CfgMods {
     class ACRE2 {
         dir = "@yard";
         picture = "idi\acre\addons\main\yard_large-logo.paa";
-        action = "https://github.com/BrettMayson/acre2";
+        action = "https://github.com/BrettMayson/yard";
         hideName = 0;
         hidePicture = 0;
         name = "YARD";

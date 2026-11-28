@@ -260,17 +260,32 @@ class FunctionFile:
         print("".join(to_print))
 
 
-def document_functions(components):
-    os.makedirs('../_includes/custom/', exist_ok=True)
+FUNCTIONS_LIST_HEADER = """# Functions List
 
-    for component in components:
-        output = os.path.join('../_includes/custom/', 'functions-list-' + component) + ".html"
-        with open(output, "w", encoding="utf-8") as file:
+The public API: `acre_api_fnc_*`. YARD keeps ACRE2's API, so these are the same functions ACRE2 missions and mods use.
+
+This page is generated from the function headers in `addons/api` (`docs/tools/document_functions.py`).
+
+---
+"""
+
+
+def escape_types(text):
+    """`<NUMBER>`-style type names are text, not HTML tags (outside code)."""
+    parts = re.split(r"(```.*?```|`[^`\n]*`)", text, flags=re.S)
+    return "".join(p if p.startswith("`") else p.replace("<", "&lt;").replace(">", "&gt;") for p in parts)
+
+
+def document_functions(components, output):
+    """Writes the documented functions as one Markdown page (the docs' Functions List)."""
+    with open(output, "w", encoding="utf-8") as file:
+        file.write(FUNCTIONS_LIST_HEADER)
+        for component in sorted(components):
             for function in components[component]:
-                file.write(function.document(component))
+                file.write(escape_types(function.document(component)))
 
 
-def crawl_dir(directory, debug=False, lint_private=False):
+def crawl_dir(directory, debug=False, lint_private=False, output=None):
     components = {}
     errors = 0
 
@@ -296,7 +311,8 @@ def crawl_dir(directory, debug=False, lint_private=False):
                 else:
                     errors += 1
 
-    document_functions(components)
+    if output and not debug:
+        document_functions(components, output)
 
     if errors != 0:
         print("\n  Unclean!\n    {} errors".format(errors))
@@ -317,6 +333,7 @@ def main():
     parser.add_argument('directory', nargs="?", type=str, default="api", help='only crawl specified module addon folder')
     parser.add_argument('--debug', action="store_true", help='only check for header debug messages')
     parser.add_argument('--lint-private', action="store_true", help='lint private function headers as well')
+    parser.add_argument('--output', type=str, help='write the Functions List page (Markdown) to this file')
     args = parser.parse_args()
 
     # Allow calling from anywhere and work our way to addons from this file
@@ -325,7 +342,7 @@ def main():
 
     if os.path.isdir(prospective_dir):
         print("Directory: {}".format(prospective_dir))
-        errors = crawl_dir(prospective_dir, args.debug, args.lint_private)
+        errors = crawl_dir(prospective_dir, args.debug, args.lint_private, args.output)
         return 0 if errors == 0 else 1
     else:
         print("Invalid directory: {}".format(prospective_dir))

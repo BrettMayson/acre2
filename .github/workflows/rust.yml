@@ -3,8 +3,7 @@ name: Rust
 on:
   push:
     branches:
-    - master
-    - yard
+    - main
     paths:
     - 'rust/**'
     - '.github/workflows/rust.yml'

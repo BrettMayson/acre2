@@ -3,8 +3,7 @@ name: Arma
 on:
   push:
     branches:
-    - master
-    - yard
+    - main
   pull_request:
 
 jobs:

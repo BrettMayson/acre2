@@ -1,28 +1,20 @@
-# Reporting an issue
+# Contributing to YARD
 
-## Before reporting
+## Reporting an issue
 
-If you have found an issue with ACRE2 please make sure that ACRE2 really is the cause of the problem. To do this try to reproduce the issue with using only `@CBA_A3` and `@acre2` on a newly created mission.
+Make sure YARD really is the cause: reproduce the issue with only `@CBA_A3` and `@yard` on a newly created mission. Removing `@yard` from the mod list doesn't show that YARD is the culprit. If the issue only happens with a third-party mod, report it to that mod's author.
 
-Indicate if the issue appears on stable or development version. In case it is the development version, please also include the commit SHA-1 hash.
+Then [open an issue](https://github.com/BrettMayson/yard/issues/new/choose) and fill in the template, including your client and server RPT files and `yard_ext.log`. Say whether it happens on a release or a development build (with the commit hash).
 
-**Please note:**
-- It's not a valid to simply remove <code>@acre2</code> from the mod list to confirm that ACRE2 is the culprit.
-- If the error happens when using a <b>third-party mod</b> contact the author of the appropriate mod and report the issue there.
-
-## Reporting the issue
-
-Head over to the [ACRE2 GitHub issue tracker](https://github.com/IDI-Systems/acre2/issues) and press the [New issue](https://github.com/IDI-Systems/acre2/issues/new) button in the top right corner. Add a descriptive title and complete the issue template.
-
-A video of the issue might be helpful in resolving it faster.
-
-
-# Feature Requests
-
-## Background
-
-ACRE2 has a lot of features planned. However, due to time constraints, we have managed to finish only a fraction of the job so far.
+Voice problems: include what the *YARD Voice* page on the map shows, and the server's RPT (it logs why the voice server couldn't start or why players can't connect).
 
 ## Requesting a feature
 
-Before adding a new one, make sure to check the previous entries from the issue tracker and do a quick search for similar accepted and revoked suggestions; please don't reiterate requests for features that had already been accepted for inclusion, or those which were disregarded earlier, but rather comment on that issue.
+Search the [issues](https://github.com/BrettMayson/yard/issues) first, and comment on an existing request rather than opening a new one.
+
+## Pull requests
+
+- Read [Building](https://brettmayson.github.io/yard/development/building.html) and the [SQF coding guidelines](https://brettmayson.github.io/yard/development/coding-guidelines-sqf.html).
+- The extension is Rust, in `rust/`: run `cargo fmt`, `cargo clippy` and `cargo test` (see [Building the Extension](https://brettmayson.github.io/yard/development/building-extensions.html)).
+- Keep ACRE2's API (`acre_api_fnc_*`, `ACRE_*` classnames, configs) compatible: missions and mods made for ACRE2 rely on it.
+- Title pull requests `System - Add|Fix|Improve|Change|Make|Remove ...`.

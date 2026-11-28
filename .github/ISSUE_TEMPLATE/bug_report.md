@@ -10,8 +10,8 @@ assignees: ''
 **Mods (complete and add to the following information):**
 - **Arma 3:** `x.xx` [e.g. 1.00 stable, rc,  dev]
 - **CBA:** `3.x.x` [e.g. 3.0.0 stable, commit hash]
-- **ACRE2:** `2.x.x` [e.g. 2.0.0 stable, commit hash]
-_Make sure to reproduce the issue with only CBA, ACRE2 (and optionally ACE3) on a newly created mission!_
+- **YARD:** `x.x.x` [release or commit hash]
+_Make sure to reproduce the issue with only CBA, YARD (and optionally ACE3) on a newly created mission!_
 
 **Description:**
 A clear and concise description of what the bug is.
@@ -29,7 +29,7 @@ A clear and concise description of what you expected to happen.
 
 **Log Files:**
 - Link to ([gist](https://gist.github.com) or [pastebin](http://pastebin.com)) to the client and/or server RPT file. An instruction to find your RPT files can be found [here](https://community.bistudio.com/wiki/Crash_Files#Arma_3).
-- Link to ([gist](https://gist.github.com) or [pastebin](http://pastebin.com)) to the extension log file, which can be found at `<Arma 3 directory>\logs\acre_dll.log`.
+- Link to ([gist](https://gist.github.com) or [pastebin](http://pastebin.com)) to the extension log, `yard_ext.log`, next to your RPT files (`%LOCALAPPDATA%\Arma 3`).
 
 **Additional context:**
 Add any other context about the problem here.

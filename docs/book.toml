@@ -1,0 +1,21 @@
+[book]
+title = "YARD Documentation"
+description = "YARD: radio and voice for Arma 3, with voice built in. Compatible with ACRE2."
+authors = ["YARD Team", "ACRE2 Team"]
+language = "en"
+src = "src"
+
+[output.html]
+git-repository-url = "https://github.com/BrettMayson/yard"
+edit-url-template = "https://github.com/BrettMayson/yard/edit/main/docs/{path}"
+site-url = "/yard/"
+default-theme = "light"
+preferred-dark-theme = "ayu"
+admonitions = true
+
+[output.html.search]
+limit-results = 20
+
+[output.html.fold]
+enable = true
+level = 1

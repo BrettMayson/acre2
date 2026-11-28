@@ -74,7 +74,7 @@ pbo_name_prefix = "acre_"
 signature_blacklist = []
 importantFiles = ["yard_logo_medium_ca.paa", "meta.cpp", "mod.cpp", "LICENSE", "README.md", "yard_x64.dll"]
 extrasFiles = ["examples", "wav2b64.exe"]
-versionFiles = ["README.md", "docs\\_data\\sidebar.yml"]
+versionFiles = ["README.md"]
 # be_cred_file expected to be in folder defined by enviorment variable CBA_PUBLISH_CREDENTIALS_PATH
 be_cred_filename = "acre_battleye_creds.json"
 

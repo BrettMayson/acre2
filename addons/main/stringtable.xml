@@ -5,20 +5,20 @@
             <English>YARD Team, ACRE2Team</English>
         </Key>
         <Key ID="STR_ACRE_Main_URL">
-            <English>https://github.com/BrettMayson/acre2</English>
-            <Czech>https://github.com/BrettMayson/acre2</Czech>
-            <French>https://github.com/BrettMayson/acre2</French>
-            <Spanish>https://github.com/BrettMayson/acre2</Spanish>
-            <Italian>https://github.com/BrettMayson/acre2</Italian>
-            <Polish>https://github.com/BrettMayson/acre2</Polish>
-            <Portuguese>https://github.com/BrettMayson/acre2</Portuguese>
-            <Russian>https://github.com/BrettMayson/acre2</Russian>
-            <German>https://github.com/BrettMayson/acre2</German>
-            <Korean>https://github.com/BrettMayson/acre2</Korean>
-            <Japanese>https://github.com/BrettMayson/acre2</Japanese>
-            <Chinese>https://github.com/BrettMayson/acre2</Chinese>
-            <Chinesesimp>https://github.com/BrettMayson/acre2</Chinesesimp>
-            <Turkish>https://github.com/BrettMayson/acre2</Turkish>
+            <English>https://github.com/BrettMayson/yard</English>
+            <Czech>https://github.com/BrettMayson/yard</Czech>
+            <French>https://github.com/BrettMayson/yard</French>
+            <Spanish>https://github.com/BrettMayson/yard</Spanish>
+            <Italian>https://github.com/BrettMayson/yard</Italian>
+            <Polish>https://github.com/BrettMayson/yard</Polish>
+            <Portuguese>https://github.com/BrettMayson/yard</Portuguese>
+            <Russian>https://github.com/BrettMayson/yard</Russian>
+            <German>https://github.com/BrettMayson/yard</German>
+            <Korean>https://github.com/BrettMayson/yard</Korean>
+            <Japanese>https://github.com/BrettMayson/yard</Japanese>
+            <Chinese>https://github.com/BrettMayson/yard</Chinese>
+            <Chinesesimp>https://github.com/BrettMayson/yard</Chinesesimp>
+            <Turkish>https://github.com/BrettMayson/yard</Turkish>
         </Key>
     </Package>
 </Project>
