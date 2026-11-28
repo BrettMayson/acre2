@@ -23,7 +23,7 @@
     <sup><strong>Requires the latest version of <a href="https://github.com/CBATeam/CBA_A3/releases">CBA A3</a>.</strong></sup>
 </p>
 
-**YARD** is a radio and voice communications mod for Arma 3: direct speech and simulated radios, with signal loss over the terrain, vehicle intercoms, languages and more. It carries voice itself: the Arma server hosts the voice server, so there's no TeamSpeak or other voice program to install.
+**YARD** (Yard's a radio doohickey) is a radio and voice communications mod for Arma 3: direct speech and simulated radios, with signal loss over the terrain, vehicle intercoms, languages and more. It carries voice itself: the Arma server hosts the voice server, so there's no TeamSpeak or other voice program to install.
 
 YARD is a modified version of [ACRE2](https://github.com/IDI-Systems/acre2) by the ACRE2 Team (IDI-Systems), and keeps its API, so missions and mods made for ACRE2 work with it. It is not affiliated with or endorsed by the ACRE2 Team.
 
