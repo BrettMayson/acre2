@@ -40,28 +40,28 @@
             <Spanish>Reemplazo de Radio</Spanish>
         </Key>
         <Key ID="STR_ACRE_sys_radio_acreBaseBox">
-            <English>ACRE Base Box</English>
-            <Czech>Základní krabice ACRE</Czech>
-            <French>Caisse de base ACRE</French>
-            <Spanish>Caja base de ACRE</Spanish>
-            <Italian>Scatola base ACRE</Italian>
-            <Portuguese>Caixa-base ACRE</Portuguese>
-            <Russian>ACRE Основное</Russian>
-            <German>ACRE Basisbox</German>
-            <Japanese>ACRE 基本物資箱</Japanese>
-            <Chinese>ACRE 基本物資箱</Chinese>
-            <Chinesesimp>ACRE 基本物资箱</Chinesesimp>
-            <Turkish>ACRE Temel Kutu</Turkish>
+            <English>YARD Base Box</English>
+            <Czech>Základní krabice YARD</Czech>
+            <French>Caisse de base YARD</French>
+            <Spanish>Caja base de YARD</Spanish>
+            <Italian>Scatola base YARD</Italian>
+            <Portuguese>Caixa-base YARD</Portuguese>
+            <Russian>YARD Основное</Russian>
+            <German>YARD Basisbox</German>
+            <Japanese>YARD 基本物資箱</Japanese>
+            <Chinese>YARD 基本物資箱</Chinese>
+            <Chinesesimp>YARD 基本物资箱</Chinesesimp>
+            <Turkish>YARD Temel Kutu</Turkish>
         </Key>
         <Key ID="STR_ACRE_sys_radio_allRadioCrate">
             <English>All Radio Crate</English>
             <Czech>Všechny Radio bedny</Czech>
-            <French>Caisse toutes radios ACRE</French>
+            <French>Caisse toutes radios YARD</French>
             <Spanish>Caja con todas las radios</Spanish>
             <Italian>Cassa con tutte le radio</Italian>
-            <Portuguese>Caixa de todos os rádios ACRE</Portuguese>
+            <Portuguese>Caixa de todos os rádios YARD</Portuguese>
             <Russian>Ящик со Всеми Рациями</Russian>
-            <German>Sämtliche ACRE Funkgeräte</German>
+            <German>Sämtliche YARD Funkgeräte</German>
             <Japanese>全ての無線機入りの箱</Japanese>
             <Chinese>全無線電機種供給箱</Chinese>
             <Chinesesimp>全无线电种类供给箱</Chinesesimp>
@@ -193,20 +193,20 @@
             <Turkish>Telsiz Ayarı Şuna Atandı: %1</Turkish>
         </Key>
         <Key ID="STR_ACRE_sys_radio_radioSupplyCrate">
-            <English>[ACRE] Radio Supply Crate</English>
-            <Czech>[ACRE] Bedna se zásobami pro rádio</Czech>
-            <French>[ACRE] Caisse d'approvisionnement radio</French>
-            <Spanish>[ACRE] Cajas con radios</Spanish>
-            <Italian>[ACRE] Cassa Radio</Italian>
-            <Polish>[ACRE] Skrzynia z radiami</Polish>
-            <Portuguese>[ACRE] Caixa de Provisionamento de Rádios</Portuguese>
-            <Russian>[ACRE] Ящик с рациями</Russian>
-            <German>[ACRE] Funkgerätekiste</German>
-            <Korean>[ACRE] 무전기 보급 상자</Korean>
-            <Japanese>[ACRE] 無線機材箱</Japanese>
-            <Chinese>[ACRE] 無線電箱</Chinese>
-            <Chinesesimp>[ACRE] 无线电箱</Chinesesimp>
-            <Turkish>[ACRE] Telsiz Mühimmat Kutusu</Turkish>
+            <English>[YARD] Radio Supply Crate</English>
+            <Czech>[YARD] Bedna se zásobami pro rádio</Czech>
+            <French>[YARD] Caisse d'approvisionnement radio</French>
+            <Spanish>[YARD] Cajas con radios</Spanish>
+            <Italian>[YARD] Cassa Radio</Italian>
+            <Polish>[YARD] Skrzynia z radiami</Polish>
+            <Portuguese>[YARD] Caixa de Provisionamento de Rádios</Portuguese>
+            <Russian>[YARD] Ящик с рациями</Russian>
+            <German>[YARD] Funkgerätekiste</German>
+            <Korean>[YARD] 무전기 보급 상자</Korean>
+            <Japanese>[YARD] 無線機材箱</Japanese>
+            <Chinese>[YARD] 無線電箱</Chinese>
+            <Chinesesimp>[YARD] 无线电箱</Chinesesimp>
+            <Turkish>[YARD] Telsiz Mühimmat Kutusu</Turkish>
         </Key>
         <Key ID="STR_ACRE_sys_radio_ui_ChangeChannel">
             <English>Change Channel</English>

@@ -7,7 +7,7 @@ class CfgAcreComponents {
     class ACRE_BaseRadio: ACRE_ComponentBase {
         type = ACRE_COMPONENT_RADIO;
         isAcre = 1;
-        name = "ACRE Base Radio";
+        name = "YARD Base Radio";
         antennaLength = 1;
         sinadRating = 1;
 
@@ -75,7 +75,7 @@ class CfgAcreComponents {
     class ACRE_BaseRack : ACRE_ComponentBase {
         type = ACRE_COMPONENT_RACK;
         isAcre = 1;
-        name = "ACRE Rack";
+        name = "YARD Rack";
 
         // Amplification
         // Speaker

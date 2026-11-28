@@ -20,7 +20,7 @@ private _vehicleSpeakers = (_speakers) select {_x in (crew (vehicle acre_player)
 private _outsideSpeakers = (_speakers - _vehicleSpeakers);
 
 private _hintMsg = [];
-_hintMsg pushBack "<t align='left' size='1.15' color='#68bbff' font='PuristaMedium'>ACRE Attenuation</t><br/><br />";
+_hintMsg pushBack "<t align='left' size='1.15' color='#68bbff' font='PuristaMedium'>YARD Attenuation</t><br/><br />";
 
 // Print player's vehicle role and compartment
 if (!isNull objectParent acre_player) then {

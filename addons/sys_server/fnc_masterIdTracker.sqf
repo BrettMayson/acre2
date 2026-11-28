@@ -159,7 +159,7 @@ if (GVAR(doFullSearch)) then {
 
             if (time > _time + 10) then { // Allow 10 seconds before indiciating it is unacknowledged.
                 #ifdef DEBUG_MODE_FULL
-                    acre_player sideChat format["%1 ACRE WARNING: Unacknowledged key not found in masterIdTable (%2)", diag_tickTime, _key];
+                    acre_player sideChat format["%1 YARD WARNING: Unacknowledged key not found in masterIdTable (%2)", diag_tickTime, _key];
                 #endif
                 WARNING_1("Unacknowledged key not found in masterIdTable (%1)",_key);
                 if (time > _time + 60) then { // Free up the ID after if it remains unclaimed after 60 seconds.
@@ -246,7 +246,7 @@ if (GVAR(doFullSearch)) then {
             };
         } else {
             #ifdef DEBUG_MODE_FULL
-                acre_player sideChat format["%1 ACRE WARNING: Id object relation created independently of unique ID creation process (%2)", diag_tickTime, _key];
+                acre_player sideChat format["%1 YARD WARNING: Id object relation created independently of unique ID creation process (%2)", diag_tickTime, _key];
             #endif
             WARNING_1("Id object relation created independently of unique ID creation process (%1)!",_key);
             _toUpdate pushBack [_key, _value];

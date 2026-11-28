@@ -2,6 +2,7 @@
 #include "\a3\editor_f\data\scripts\dikCodes.h"
 
 private _category = format ["ACRE2 %1", localize "str_a3_cfghints_curator_curator_displayname"];
+[_category, format ["YARD %1", localize "str_a3_cfghints_curator_curator_displayname"]] call CBA_fnc_registerKeybindModPrettyName;
 
 [_category, "ZeusTalkFromCamera", [LLSTRING(SpeakFromCamera), LLSTRING(SpeakFromCamera_Description)],
     { call FUNC(handleZeusSpeakPress) },
@@ -11,7 +12,7 @@ private _category = format ["ACRE2 %1", localize "str_a3_cfghints_curator_curato
 if (hasInterface && {isClass (configFile >> "CfgPatches" >> "ace_interact_menu")}) then {
     private _acreNode = [
         "ACRE_ZeusEars",
-        "ACRE",
+        "YARD",
         ICON_RADIO_CALL,
         {},
         {true}

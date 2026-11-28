@@ -1,7 +1,7 @@
 class CfgFactionClasses {
     class NO_CATEGORY;
     class GVAR(mission_setup): NO_CATEGORY {
-        displayName = "ACRE";
+        displayName = "YARD";
     };
 };
 class CfgVehicles {
@@ -127,7 +127,7 @@ class CfgVehicles {
         };
 
         class ModuleDescription: ModuleDescription {
-            description = "This module configures different difficulty setting aspects of ACRE.";
+            description = "This module configures different difficulty setting aspects of YARD.";
             sync[] = {};
         };
     };

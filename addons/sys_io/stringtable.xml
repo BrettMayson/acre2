@@ -2,24 +2,24 @@
 <Project name="ACRE">
     <Package name="sys_io">
         <Key ID="STR_ACRE_sys_io_acreConnected">
-            <English>ACRE connected</English>
-            <Czech>ACRE je připojen</Czech>
-            <French>ACRE connecté</French>
-            <Spanish>ACRE conectado</Spanish>
-            <Italian>ACRE connesso</Italian>
-            <Portuguese>ACRE conectado</Portuguese>
-            <Russian>ACRE подключен</Russian>
-            <German>ACRE verbunden</German>
-            <Japanese>ACRE 接続完了</Japanese>
-            <Chinese>ACRE 已連接</Chinese>
-            <Chinesesimp>ACRE 已连接</Chinesesimp>
-            <Turkish>ACRE Bağlandı</Turkish>
+            <English>YARD connected</English>
+            <Czech>YARD je připojen</Czech>
+            <French>YARD connecté</French>
+            <Spanish>YARD conectado</Spanish>
+            <Italian>YARD connesso</Italian>
+            <Portuguese>YARD conectado</Portuguese>
+            <Russian>YARD подключен</Russian>
+            <German>YARD verbunden</German>
+            <Japanese>YARD 接続完了</Japanese>
+            <Chinese>YARD 已連接</Chinese>
+            <Chinesesimp>YARD 已连接</Chinesesimp>
+            <Turkish>YARD Bağlandı</Turkish>
         </Key>
         <Key ID="STR_ACRE_sys_io_acreNotConnected">
-            <English>ACRE is not connected to the voice server!</English>
+            <English>YARD is not connected to the voice server!</English>
         </Key>
         <Key ID="STR_ACRE_sys_io_recoveredConnection">
-            <English>ACRE2 reconnected to the voice server</English>
+            <English>YARD reconnected to the voice server</English>
         </Key>
     </Package>
 </Project>

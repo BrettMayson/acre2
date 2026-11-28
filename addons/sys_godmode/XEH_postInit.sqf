@@ -56,6 +56,7 @@ LOAD_SOUND(Acre_GodPingOff);
 
 // Keybinds - God Mode
 private _category = format ["ACRE2 %1", localize LSTRING(godMode)];
+[_category, format ["YARD %1", localize LSTRING(godMode)]] call CBA_fnc_registerKeybindModPrettyName;
 [_category, "GodModePTTKeyCurrentChannel", [localize LSTRING(currentChannelPttKey), localize LSTRING(currentChannelPttKey_description)], {
     [GODMODE_CURRENTCHANNEL] call FUNC(handlePttKeyPress)
 }, {

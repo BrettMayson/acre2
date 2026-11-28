@@ -2,7 +2,7 @@
     QGVAR(postmixGlobalVolume),
     "SLIDER",
     localize LSTRING(postmixGlobalVolume_displayName),
-    "ACRE2",
+    "YARD",
     [0, 3, 1, 2],
     false,
     {["globalVolume", _this] call FUNC(setPluginSetting)}
@@ -12,7 +12,7 @@
     QGVAR(premixGlobalVolume),
     "SLIDER",
     localize LSTRING(premixGlobalVolume_displayName),
-    "ACRE2",
+    "YARD",
     [0, 3, 1, 2],
     false,
     {["premixGlobalVolume", _this] call FUNC(setPluginSetting)}
@@ -22,7 +22,7 @@
     QGVAR(defaultRadioVolume),
     "LIST",
     localize LSTRING(defaultRadioVolume_displayName),
-    "ACRE2",
+    "YARD",
     [[0.2, 0.4, 0.6, 0.8, 1], ["20%", "40%", "60%", "80%", "100%"], 3]
 ] call CBA_fnc_addSetting;
 
@@ -30,7 +30,7 @@
     QGVAR(spectatorVolume),
     "SLIDER",
     localize LSTRING(spectatorVolume_displayName),
-    "ACRE2",
+    "YARD",
     [0, 1, 1, 2],
     false,
     {}
@@ -40,7 +40,7 @@
     QGVAR(godVolume),
     "SLIDER",
     localize LSTRING(godVolume_displayName),
-    "ACRE2",
+    "YARD",
     [0.2, 1, 1, 2], // Minimal value so it always stays hearable
     false,
     {}
@@ -50,7 +50,7 @@
     QGVAR(radioNoise),
     "CHECKBOX",
     localize LSTRING(radioNoise_displayName),
-    "ACRE2",
+    "YARD",
     true,
     false,
     {["disableRadioNoise", _this] call FUNC(setPluginSetting)}
@@ -61,7 +61,7 @@
     QGVAR(voiceActivation),
     "LIST",
     [localize LSTRING(voiceActivation_displayName), localize LSTRING(voiceActivation_description)],
-    "ACRE2",
+    "YARD",
     [[0, 1], [localize LSTRING(voiceActivation_vad), localize LSTRING(voiceActivation_ptt)], 0],
     false,
     {[] call FUNC(applyVoiceSettings)}
@@ -71,7 +71,7 @@
     QGVAR(voiceThreshold),
     "SLIDER",
     [localize LSTRING(voiceThreshold_displayName), localize LSTRING(voiceThreshold_description)],
-    "ACRE2",
+    "YARD",
     [-80, -10, -45, 0],
     false,
     {[] call FUNC(applyVoiceSettings)}
@@ -81,7 +81,7 @@
     QGVAR(voiceThresholdClose),
     "SLIDER",
     [localize LSTRING(voiceThresholdClose_displayName), localize LSTRING(voiceThresholdClose_description)],
-    "ACRE2",
+    "YARD",
     [-80, -10, -50, 0],
     false,
     {[] call FUNC(applyVoiceSettings)}
@@ -93,7 +93,7 @@
     QGVAR(noiseSuppression),
     "CHECKBOX",
     [localize LSTRING(noiseSuppression_displayName), localize LSTRING(noiseSuppression_description)],
-    "ACRE2",
+    "YARD",
     true,
     false,
     {[] call FUNC(applyVoiceSettings)}
@@ -103,7 +103,7 @@
     QGVAR(speechDetection),
     "CHECKBOX",
     [localize LSTRING(speechDetection_displayName), localize LSTRING(speechDetection_description)],
-    "ACRE2",
+    "YARD",
     true,
     false,
     {[] call FUNC(applyVoiceSettings)}
@@ -115,7 +115,7 @@
     QGVAR(pttReleaseDelay),
     "SLIDER",
     [localize LSTRING(pttReleaseDelay_displayName), localize LSTRING(pttReleaseDelay_description)],
-    "ACRE2",
+    "YARD",
     [0, 1, 0.2, 2],
     false,
     {
@@ -130,7 +130,7 @@
     QGVAR(selfHearing),
     "CHECKBOX",
     [localize LSTRING(selfHearing_displayName), localize LSTRING(selfHearing_description)],
-    "ACRE2",
+    "YARD",
     true,
     false,
     {[] call FUNC(applyVoiceSettings)}
@@ -159,7 +159,7 @@ if (hasInterface) then {
     QGVAR(inputDevice),
     "LIST",
     [localize LSTRING(inputDevice_displayName), localize LSTRING(audioDevice_description)],
-    "ACRE2",
+    "YARD",
     [_inputDevices select 0, _inputDevices select 1, 0],
     false,
     {[] call FUNC(applyVoiceSettings)}
@@ -169,7 +169,7 @@ if (hasInterface) then {
     QGVAR(outputDevice),
     "LIST",
     [localize LSTRING(outputDevice_displayName), localize LSTRING(audioDevice_description)],
-    "ACRE2",
+    "YARD",
     [_outputDevices select 0, _outputDevices select 1, 0],
     false,
     {[] call FUNC(applyVoiceSettings)}
@@ -204,7 +204,7 @@ if (hasInterface) then {
     QGVAR(interference),
     "CHECKBOX",
     localize LSTRING(interference_displayName),
-    "ACRE2",
+    "YARD",
     true,
     true,
     {[_this] call FUNC(setInterference)}
@@ -215,7 +215,7 @@ if (hasInterface) then {
     QGVAR(fullDuplex),
     "CHECKBOX",
     localize LSTRING(fullDuplex_displayName),
-    "ACRE2",
+    "YARD",
     false,
     true
 ] call CBA_fnc_addSetting;
@@ -225,7 +225,7 @@ if (hasInterface) then {
     QGVAR(ignoreAntennaDirection),
     "CHECKBOX",
     localize LSTRING(antennaDirection_displayName),
-    "ACRE2",
+    "YARD",
     false,
     true,
     {[_this] call FUNC(ignoreAntennaDirection)}
@@ -236,7 +236,7 @@ if (hasInterface) then {
     QGVAR(automaticAntennaDirection),
     "CHECKBOX",
     localize LSTRING(autoAntennaDirection_displayName),
-    "ACRE2",
+    "YARD",
     false
 ] call CBA_fnc_addSetting;
 
@@ -245,7 +245,7 @@ if (hasInterface) then {
     QGVAR(terrainLoss),
     "SLIDER",
     localize LSTRING(terrainLoss_displayName),
-    "ACRE2",
+    "YARD",
     [0, 1, 1, 2],
     true,
     {[_this] call FUNC(setLossModelScale)}
@@ -256,7 +256,7 @@ if (hasInterface) then {
     QGVAR(revealToAI),
     "SLIDER",
     localize LSTRING(revealToAI_displayName),
-    "ACRE2",
+    "YARD",
     [0, 2.50, 1, 2],
     true,
     {[_this] call FUNC(setRevealToAI)}
@@ -267,7 +267,7 @@ if (hasInterface) then {
     QGVAR(incomingTransmissionNotification),
     "CHECKBOX",
     localize LSTRING(incomingTransmissionNotification),
-    "ACRE2",
+    "YARD",
     false,
     true,
     {}
@@ -277,7 +277,7 @@ if (hasInterface) then {
     QGVAR(rackTransmissionNotification),
     "CHECKBOX",
     localize LSTRING(rackTransmissionNotification),
-    "ACRE2",
+    "YARD",
     false,
     true,
     {}

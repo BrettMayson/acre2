@@ -24,12 +24,12 @@ class CfgPatches {
 
 class CfgMods {
     class ACRE2 {
-        dir = "@ACRE2";
-        picture = "idi\acre\addons\main\acre2_large-logo.paa";
-        action = "https://github.com/IDI-Systems/acre2";
+        dir = "@yard";
+        picture = "idi\acre\addons\main\yard_large-logo.paa";
+        action = "https://github.com/BrettMayson/acre2";
         hideName = 0;
         hidePicture = 0;
-        name = "ACRE2";
+        name = "YARD";
     };
 };
 

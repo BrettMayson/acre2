@@ -22,4 +22,4 @@ A local multiplayer host hosts voice like a dedicated server does: set *Public a
 
 **Logs**
 
-The voice extension logs to `%LOCALAPPDATA%\Arma 3\acre2_ext.log` (set `ACRE2_LOG=debug` for more).
+The voice extension logs to `%LOCALAPPDATA%\Arma 3\yard_ext.log` (set `YARD_LOG=debug` for more).

@@ -3,7 +3,7 @@
     QGVAR(signalModel),
     "LIST",
     localize LSTRING(signalModel_displayName),
-    "ACRE2",
+    "YARD",
     [
         [SIGNAL_ENUMS],
         [SIGNAL_NAMES],

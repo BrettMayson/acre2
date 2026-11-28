@@ -37,6 +37,8 @@ if (!GVAR(aceLoaded)) then {
 };
 
 // Keybinds - PTT
+// The keybind category ID stays "ACRE2" so existing binds and CBA_fnc_getKeybind lookups keep working.
+["ACRE2", "YARD"] call CBA_fnc_registerKeybindModPrettyName;
 ["ACRE2", "AltPTTKey1", [localize LSTRING(AltPTTKey1), localize LSTRING(AltPTTKey1_description)], {
     [0] call FUNC(handleMultiPttKeyPress)
 }, {
@@ -137,9 +139,9 @@ if ([findDisplay 0] isNotEqualTo allDisplays) then {
 
             if (_result < 0) then {
                 if (_result == -1) then {
-                    WARNING_1("Map Load [%1] (WRP) parsing error - ACRE will now assume the terrain is flat and all at elevation 0m.",_wrpLocation);
+                    WARNING_1("Map Load [%1] (WRP) parsing error - YARD will now assume the terrain is flat and all at elevation 0m.",_wrpLocation);
                 } else {
-                    ERROR_MSG_2("ACRE was unable to parse the map [%1]\nACRE will now use Arcade signal propagation model.\nPlease file a ticket on our tracker: %2",_wrpLocation,LELSTRING(Main,URL));
+                    ERROR_MSG_2("YARD was unable to parse the map [%1]\nYARD will now use Arcade signal propagation model.\nPlease file a ticket on our tracker: %2",_wrpLocation,LELSTRING(Main,URL));
                 };
             } else {
                 INFO_2("Map Load Complete: %1 with radio signal code %2",_wrpLocation,[worldName] call EFUNC(sys_signal,getRadioClimateCode));

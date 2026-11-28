@@ -33,7 +33,7 @@ class CfgVehicles {
         scope = 2;
         scopeCurator = 2;
         scopeArsenal = 2;
-        displayName = "ACRE VHF30108 GSM";
+        displayName = "YARD VHF30108 GSM";
         model = QPATHTOF(data\vhf30108\models\vhf30108.p3d);
         icon = QPATHTOF(data\vhf30108\ui\icon_antenna_ca.paa);
         editorPreview = QPATHTOF(data\vhf30108\ui\spikeMast.jpg);
@@ -111,7 +111,7 @@ class CfgVehicles {
         scope = 2;
         scopeCurator = 2;
         scopeArsenal = 2;
-        displayName = "ACRE VHF30108 GS";
+        displayName = "YARD VHF30108 GS";
         model = QPATHTOF(data\vhf30108\models\vhf30108spike.p3d);
         icon = QPATHTOF(data\vhf30108\ui\icon_antenna_ca.paa);
         editorPreview = QPATHTOF(data\vhf30108\ui\spike.jpg);

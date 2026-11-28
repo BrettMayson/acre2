@@ -2,16 +2,16 @@
 <Project name="ACRE">
     <Package name="sys_gestures">
         <Key ID="STR_ACRE_sys_gestures_category">
-            <English>ACRE2 Gestures</English>
-            <Czech>Gesta ACRE2</Czech>
-            <French>ACRE2 Gestuelle</French>
-            <Spanish>ACRE2 Gestos</Spanish>
-            <Italian>ACRE2 Gesti</Italian>
-            <Portuguese>ACRE2 Gestos</Portuguese>
-            <German>ACRE2 Gesten</German>
-            <Japanese>ACRE2 ジェスチャー</Japanese>
-            <Chinesesimp>ACRE2 动作</Chinesesimp>
-            <Turkish>ACRE2 El Hareketleri</Turkish>
+            <English>YARD Gestures</English>
+            <Czech>Gesta YARD</Czech>
+            <French>YARD Gestuelle</French>
+            <Spanish>YARD Gestos</Spanish>
+            <Italian>YARD Gesti</Italian>
+            <Portuguese>YARD Gestos</Portuguese>
+            <German>YARD Gesten</German>
+            <Japanese>YARD ジェスチャー</Japanese>
+            <Chinesesimp>YARD 动作</Chinesesimp>
+            <Turkish>YARD El Hareketleri</Turkish>
         </Key>
         <Key ID="STR_ACRE_sys_gestures_enabled">
             <English>Enable</English>

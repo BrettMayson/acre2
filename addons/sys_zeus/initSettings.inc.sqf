@@ -1,4 +1,4 @@
-private _zeusCategory = format ["ACRE2 %1", localize "str_a3_cfghints_curator_curator_displayname"];
+private _zeusCategory = format ["YARD %1", localize "str_a3_cfghints_curator_curator_displayname"];
 
 // Default remote controlled voice source
 [

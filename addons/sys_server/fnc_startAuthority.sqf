@@ -2,7 +2,7 @@
 /*
  * Author: ACRE2Team
  * Hosts the voice server inside the voice extension, on the port and public address from the
- * CBA server settings (or ACRE2_VOICE_PORT / ACRE2_VOICE_ADDRESS), and starts feeding it player
+ * CBA server settings (or YARD_VOICE_PORT / YARD_VOICE_ADDRESS), and starts feeding it player
  * positions.
  *
  * Arguments:
@@ -36,10 +36,10 @@ if (isNil QGVAR(voiceStatePFH)) then {
 
 private _port = parseNumber (missionNamespace getVariable [QGVAR(voicePort), "9987"]);
 if (_port < 0 || {_port > 65535}) exitWith {
-    ERROR_1("Voice port %1 is not a valid UDP port. Set it in the ACRE2 Voice Server settings.",_port);
+    ERROR_1("Voice port %1 is not a valid UDP port. Set it in the YARD Voice Server settings.",_port);
 };
 private _address = missionNamespace getVariable [QGVAR(voiceAddress), ""];
 
 if ((["server:start", [_port, _address]] call EFUNC(sys_io,ext)) != "ok") then {
-    ERROR("Could not start the voice server. Check the ACRE2 Voice Server settings (port, public address) and the RPT warning above.");
+    ERROR("Could not start the voice server. Check the YARD Voice Server settings (port, public address) and the RPT warning above.");
 };

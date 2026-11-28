@@ -18,4 +18,4 @@
 
 params ["_playerName", "_radioId"];
 
-ERROR_2("Invalid garbage collection for radio '%1' from player %2! Please forward on the client and server RPTs to the ACRE2 bug tracker.",_radioId,_playerName);
+ERROR_2("Invalid garbage collection for radio '%1' from player %2! Please forward on the client and server RPTs to the YARD bug tracker.",_radioId,_playerName);

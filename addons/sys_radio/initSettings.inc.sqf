@@ -2,7 +2,7 @@
     QGVAR(defaultRadio),
     "LIST",
     [LLSTRING(DefaultRadio_DisplayName), LLSTRING(DefaultRadio_Description)],
-    "ACRE2",
+    "YARD",
     [
         [""] + (GVAR(defaultRadios) select 0),
         [localize "str_a3_cfgglasses_none0"] + (GVAR(defaultRadios) select 1),

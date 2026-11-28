@@ -16,8 +16,17 @@ pub fn get() -> &'static Runtime {
     })
 }
 
-/// Logs to `acre2_ext.log` next to the Arma profile (`%LOCALAPPDATA%\Arma 3`), or the working
-/// directory. `ACRE2_LOG` sets the filter (default `info`).
+/// Reads `YARD_<suffix>`, falling back to the older `ACRE2_<suffix>`. Returns the variable's name
+/// with its value.
+pub fn env_var(suffix: &str) -> Option<(String, String)> {
+    ["YARD_", "ACRE2_"].into_iter().find_map(|prefix| {
+        let name = format!("{prefix}{suffix}");
+        std::env::var(&name).ok().map(|value| (name, value))
+    })
+}
+
+/// Logs to `yard_ext.log` next to the Arma profile (`%LOCALAPPDATA%\Arma 3`), or the working
+/// directory. `YARD_LOG` (or `ACRE2_LOG`) sets the filter (default `info`).
 pub fn init_logging() {
     static ONCE: OnceLock<()> = OnceLock::new();
     ONCE.get_or_init(|| {
@@ -25,11 +34,12 @@ pub fn init_logging() {
             .map(|d| std::path::PathBuf::from(d).join("Arma 3"))
             .filter(|d| d.is_dir())
             .unwrap_or_else(|| std::path::PathBuf::from("."));
-        let Ok(file) = std::fs::File::create(dir.join("acre2_ext.log")) else {
+        let Ok(file) = std::fs::File::create(dir.join("yard_ext.log")) else {
             return;
         };
-        let filter = tracing_subscriber::EnvFilter::try_from_env("ACRE2_LOG")
-            .unwrap_or_else(|_| tracing_subscriber::EnvFilter::new("info"));
+        let filter = env_var("LOG")
+            .and_then(|(_, f)| tracing_subscriber::EnvFilter::try_new(f).ok())
+            .unwrap_or_else(|| tracing_subscriber::EnvFilter::new("info"));
         let _ = tracing_subscriber::fmt()
             .with_env_filter(filter)
             .with_ansi(false)

@@ -153,19 +153,19 @@
             <Turkish>Babel Dil Değiştir</Turkish>
         </Key>
         <Key ID="STR_ACRE_sys_core_CategoryUI">
-            <English>ACRE2 UI</English>
-            <Czech>ACRE2 UI</Czech>
-            <French>ACRE2 IU</French>
-            <Spanish>ACRE2 Interfaz</Spanish>
-            <Italian>ACRE2 IU</Italian>
-            <Polish>ACRE2 UI</Polish>
-            <Portuguese>IU ACRE2</Portuguese>
-            <Russian>ACRE2 Интерфейс</Russian>
-            <German>ACRE2 Nutzeroberfläche</German>
-            <Japanese>ACRE2 UI</Japanese>
-            <Chinese>ACRE 2 界面</Chinese>
-            <Chinesesimp>ACRE2 界面</Chinesesimp>
-            <Turkish>ACRE2 Arayüz</Turkish>
+            <English>YARD UI</English>
+            <Czech>YARD UI</Czech>
+            <French>YARD IU</French>
+            <Spanish>YARD Interfaz</Spanish>
+            <Italian>YARD IU</Italian>
+            <Polish>YARD UI</Polish>
+            <Portuguese>IU YARD</Portuguese>
+            <Russian>YARD Интерфейс</Russian>
+            <German>YARD Nutzeroberfläche</German>
+            <Japanese>YARD UI</Japanese>
+            <Chinese>YARD 界面</Chinese>
+            <Chinesesimp>YARD 界面</Chinesesimp>
+            <Turkish>YARD Arayüz</Turkish>
         </Key>
         <Key ID="STR_ACRE_sys_core_DefaultPTTKey">
             <English>Active Radio Transmit</English>
@@ -232,13 +232,13 @@
             <Turkish>Sonraki Kanal (Aktif Telsizde)</Turkish>
         </Key>
         <Key ID="STR_ACRE_sys_core_Options">
-            <English>ACRE Options</English>
-            <Czech>ACRE Nastavení</Czech>
-            <French>Options ACRE</French>
-            <Italian>Opzioni ACRE</Italian>
-            <German>ACRE-Optionen</German>
-            <Japanese>ACRE 設定</Japanese>
-            <Spanish>Opciones ACRE</Spanish>
+            <English>YARD Options</English>
+            <Czech>YARD Nastavení</Czech>
+            <French>Options YARD</French>
+            <Italian>Opzioni YARD</Italian>
+            <German>YARD-Optionen</German>
+            <Japanese>YARD 設定</Japanese>
+            <Spanish>Opciones YARD</Spanish>
         </Key>
         <Key ID="STR_ACRE_sys_core_PreviousChannel">
             <English>Previous Channel (Active Radio)</English>
@@ -635,19 +635,19 @@
             <English>Push to talk for direct speech, when direct speech activation is set to push to talk.</English>
         </Key>
         <Key ID="STR_ACRE_sys_core_voiceServerCategory">
-            <English>ACRE2 Voice Server</English>
+            <English>YARD Voice Server</English>
         </Key>
         <Key ID="STR_ACRE_sys_core_voicePort_displayName">
             <English>Voice port (UDP)</English>
         </Key>
         <Key ID="STR_ACRE_sys_core_voicePort_description">
-            <English>UDP port the server hosts voice on. Open it in the firewall. ACRE2_VOICE_PORT overrides this.</English>
+            <English>UDP port the server hosts voice on. Open it in the firewall. YARD_VOICE_PORT overrides this.</English>
         </Key>
         <Key ID="STR_ACRE_sys_core_voiceAddress_displayName">
             <English>Public address</English>
         </Key>
         <Key ID="STR_ACRE_sys_core_voiceAddress_description">
-            <English>Public IP or hostname players reach this server at (optionally with :port). Required. ACRE2_VOICE_ADDRESS overrides this.</English>
+            <English>Public IP or hostname players reach this server at (optionally with :port). Required. YARD_VOICE_ADDRESS overrides this.</English>
         </Key>
         <Key ID="STR_ACRE_sys_core_voiceThresholdClose_displayName">
             <English>Voice activation close level (dB)</English>
@@ -689,7 +689,7 @@
             <English>System default</English>
         </Key>
         <Key ID="STR_ACRE_sys_core_micTest_title">
-            <English>ACRE Microphone Test</English>
+            <English>YARD Microphone Test</English>
         </Key>
         <Key ID="STR_ACRE_sys_core_micTest_start">
             <English>Start test</English>
@@ -728,7 +728,7 @@
             <English>Voice activation: opens at %1 dB, closes at %2 dB</English>
         </Key>
         <Key ID="STR_ACRE_sys_core_diary_subject">
-            <English>ACRE Voice</English>
+            <English>YARD Voice</English>
         </Key>
         <Key ID="STR_ACRE_sys_core_diary_title">
             <English>Voice status</English>

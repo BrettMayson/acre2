@@ -8,7 +8,7 @@ class CfgVehicles {
     class Thing;
     class ACRE_BaseRack : Thing {
         author = ECSTRING(main,Author);
-        displayName = "ACRE Base Rack";
+        displayName = "YARD Base Rack";
         scope = 0;
         mass = 0;
         vehicleClass = "";

@@ -67,17 +67,17 @@
             <Spanish>Por-Bando /con una Lengua común</Spanish>
         </Key>
         <Key ID="STR_ACRE_api_basicMissionSetup_DefaultRadio_Description">
-            <English>Default radio for ACRE to give player</English>
-            <Czech>Výchozí rádio pro ACRE, které dá hráči.</Czech>
-            <French>Radio ACRE par défaut à donner au joueur.</French>
+            <English>Default radio for YARD to give player</English>
+            <Czech>Výchozí rádio pro YARD, které dá hráči.</Czech>
+            <French>Radio YARD par défaut à donner au joueur.</French>
             <Italian>Radio predefinita da dare al giocatore</Italian>
             <Portuguese>Rádio padrão para o jogador</Portuguese>
             <German>Funkgerät, welches den Spielern gegeben wird</German>
-            <Japanese>ACREがプレーヤーに提供するデフォルトの無線機</Japanese>
-            <Chinese>預設給於玩家的ACRE 無線電</Chinese>
-            <Chinesesimp>预设给予玩家的ACRE 无线电</Chinesesimp>
-            <Turkish>ACRE'ın oyunculara vereceği telsiz</Turkish>
-            <Spanish>Radio por defecto entregada por ACRE al jugador</Spanish>
+            <Japanese>YARDがプレーヤーに提供するデフォルトの無線機</Japanese>
+            <Chinese>預設給於玩家的YARD 無線電</Chinese>
+            <Chinesesimp>预设给予玩家的YARD 无线电</Chinesesimp>
+            <Turkish>YARD'ın oyunculara vereceği telsiz</Turkish>
+            <Spanish>Radio por defecto entregada por YARD al jugador</Spanish>
         </Key>
         <Key ID="STR_ACRE_api_basicMissionSetup_DefaultRadio_DisplayName">
             <English>Default Radio 1</English>
@@ -132,17 +132,17 @@
             <Spanish>Radio por defecto 2</Spanish>
         </Key>
         <Key ID="STR_ACRE_api_basicMissionSetup_Module_Description">
-            <English>This module defines basic ACRE setup for a mission</English>
-            <Czech>Tento modul definduje klasické ACRE nastavení na misi.</Czech>
-            <French>Ce module permet la configuration du module de base ACRE pour la mission.</French>
-            <Italian>Questo modulo definisce la configurazione di base di ACRE per una missione</Italian>
-            <Portuguese>Este módulo define configurações básicas do ACRE para a missão</Portuguese>
-            <German>Dieses Modul definiert das grundlegende ACRE-Setup für eine Mission</German>
-            <Japanese>このモジュールは、 このミッションの為の基本的なACREのセットアップを定義します</Japanese>
-            <Chinese>這個模塊為了任務定義基礎的ACRE 設定</Chinese>
-            <Chinesesimp>这个模块为了任务定义基础的ACRE 设定</Chinesesimp>
+            <English>This module defines basic YARD setup for a mission</English>
+            <Czech>Tento modul definduje klasické YARD nastavení na misi.</Czech>
+            <French>Ce module permet la configuration du module de base YARD pour la mission.</French>
+            <Italian>Questo modulo definisce la configurazione di base di YARD per una missione</Italian>
+            <Portuguese>Este módulo define configurações básicas do YARD para a missão</Portuguese>
+            <German>Dieses Modul definiert das grundlegende YARD-Setup für eine Mission</German>
+            <Japanese>このモジュールは、 このミッションの為の基本的なYARDのセットアップを定義します</Japanese>
+            <Chinese>這個模塊為了任務定義基礎的YARD 設定</Chinese>
+            <Chinesesimp>这个模块为了任务定义基础的YARD 设定</Chinesesimp>
             <Turkish>Bu modül bir görev için temel ayarları tanımlar</Turkish>
-            <Spanish>Este módulo define la configuración básica de ACRE para una misión</Spanish>
+            <Spanish>Este módulo define la configuración básica de YARD para una misión</Spanish>
         </Key>
         <!-- Basic Mission Setup Module-->
         <Key ID="STR_ACRE_api_basicMissionSetup_Module_DisplayName">
@@ -159,17 +159,17 @@
             <Spanish>Configuración Básica de Misión</Spanish>
         </Key>
         <Key ID="STR_ACRE_api_basicMissionSetup_RadioSetup_Description">
-            <English>Set to true to have each side have different ACRE radio frequencies</English>
-            <Czech>Nastavením na hodnotu true bude mít každá strana jiné rádiové frekvence ACRE.</Czech>
+            <English>Set to true to have each side have different YARD radio frequencies</English>
+            <Czech>Nastavením na hodnotu true bude mít každá strana jiné rádiové frekvence YARD.</Czech>
             <French>Définit si chaque camp doit avoir des fréquences radio qui lui sont propres.</French>
-            <Italian>Imposta su true per assegnare frequenze radio ACRE diverse a ogni fazione</Italian>
-            <Portuguese>Determina se cada Lado terá diferentes frequências de rádio ACRE.</Portuguese>
-            <German>Auf wahr setzen, damit jede Seite unterschiedliche ACRE-Funkfrequenzen hat</German>
-            <Japanese>true に設定すると、 各陣営によって異なるACRE無線周波数が使用されます。</Japanese>
-            <Chinese>設為是時會讓不同陣營的玩家有著不同的ACRE 無線電頻率</Chinese>
-            <Chinesesimp>设为实时让不同阵营的玩家有着不同的ACRE 无线电频率</Chinesesimp>
-            <Turkish>Bu ayar ile her tarafın kendi ACRE telsiz frekansları olur</Turkish>
-            <Spanish>Habilitar para que cada bando tenga diferentes frecuencias de radio ACRE</Spanish>
+            <Italian>Imposta su true per assegnare frequenze radio YARD diverse a ogni fazione</Italian>
+            <Portuguese>Determina se cada Lado terá diferentes frequências de rádio YARD.</Portuguese>
+            <German>Auf wahr setzen, damit jede Seite unterschiedliche YARD-Funkfrequenzen hat</German>
+            <Japanese>true に設定すると、 各陣営によって異なるYARD無線周波数が使用されます。</Japanese>
+            <Chinese>設為是時會讓不同陣營的玩家有著不同的YARD 無線電頻率</Chinese>
+            <Chinesesimp>设为实时让不同阵营的玩家有着不同的YARD 无线电频率</Chinesesimp>
+            <Turkish>Bu ayar ile her tarafın kendi YARD telsiz frekansları olur</Turkish>
+            <Spanish>Habilitar para que cada bando tenga diferentes frecuencias de radio YARD</Spanish>
         </Key>
         <Key ID="STR_ACRE_api_basicMissionSetup_RadioSetup_DisplayName">
             <English>Channels Per Side</English>
@@ -445,17 +445,17 @@
             <Turkish>Kanal 9</Turkish>
         </Key>
         <Key ID="STR_ACRE_api_nameChannels_Module_Description">
-            <English>This module defines basic channel naming for a mission in ACRE</English>
-            <Czech>Tento modul definuje základní pojmenování kanálů pro misi v ACRE.</Czech>
-            <French>Ce module permet de nommer les canaux radio ACRE pour la mission.</French>
-            <Italian>Questo modulo definisce la nomenclatura di base dei canali per una missione con ACRE</Italian>
-            <Portuguese>Este módulo define a nomeação de canais para a missão no ACRE</Portuguese>
-            <German>Dieses Modul definiert Grundlegende Kanal Namen für die Mission mit ACRE</German>
-            <Japanese>このモジュールは、 このミッションの為の基本的なACREのチャンネル名を定義します</Japanese>
-            <Chinese>這個模組為任務定義基礎的ACRE 頻道名稱</Chinese>
-            <Chinesesimp>这个模组为任务定义基础的ACRE频道名称</Chinesesimp>
+            <English>This module defines basic channel naming for a mission in YARD</English>
+            <Czech>Tento modul definuje základní pojmenování kanálů pro misi v YARD.</Czech>
+            <French>Ce module permet de nommer les canaux radio YARD pour la mission.</French>
+            <Italian>Questo modulo definisce la nomenclatura di base dei canali per una missione con YARD</Italian>
+            <Portuguese>Este módulo define a nomeação de canais para a missão no YARD</Portuguese>
+            <German>Dieses Modul definiert Grundlegende Kanal Namen für die Mission mit YARD</German>
+            <Japanese>このモジュールは、 このミッションの為の基本的なYARDのチャンネル名を定義します</Japanese>
+            <Chinese>這個模組為任務定義基礎的YARD 頻道名稱</Chinese>
+            <Chinesesimp>这个模组为任务定义基础的YARD频道名称</Chinesesimp>
             <Turkish>Bu modül bir görev için kanal isimlerini tanımlar</Turkish>
-            <Spanish>Este módulo define el nombre de los canales para una misión en ACRE</Spanish>
+            <Spanish>Este módulo define el nombre de los canales para una misión en YARD</Spanish>
         </Key>
         <!-- Name Channels Module-->
         <Key ID="STR_ACRE_api_nameChannels_Module_DisplayName">

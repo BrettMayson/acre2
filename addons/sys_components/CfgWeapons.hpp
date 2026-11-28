@@ -18,12 +18,12 @@ class CfgWeapons {
     };
 
     class ACRE_BaseRadio: ACRE_BaseComponent {
-        displayName = "ACRE Radio";
-        useActionTitle = "ACRE: Pickup Radio";
+        displayName = "YARD Radio";
+        useActionTitle = "YARD: Pickup Radio";
         acre_isRadio = 1;
 
         class Library {
-            libTextDesc = "ACRE Radio";
+            libTextDesc = "YARD Radio";
         };
     };
 

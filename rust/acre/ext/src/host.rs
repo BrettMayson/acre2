@@ -5,7 +5,8 @@
 //! configure or keep secret. `address` is where players connect (a public IP or hostname, with
 //! or without `:port`).
 //!
-//! `ACRE2_VOICE_PORT` and `ACRE2_VOICE_ADDRESS` override the arguments.
+//! `YARD_VOICE_PORT` and `YARD_VOICE_ADDRESS` override the arguments (the older
+//! `ACRE2_VOICE_PORT` and `ACRE2_VOICE_ADDRESS` still work).
 
 use std::{
     net::{IpAddr, SocketAddr},
@@ -189,19 +190,19 @@ fn reuse(port: u16, address: &str) -> bool {
 /// `authority_failed`). A server already running on the same port and address is kept;
 /// otherwise it's restarted.
 fn start(port: u16, address: String) -> Result<&'static str, String> {
-    let port = match std::env::var("ACRE2_VOICE_PORT") {
-        Ok(p) => p
+    let port = match crate::runtime::env_var("VOICE_PORT") {
+        Some((name, p)) => p
             .trim()
             .parse()
-            .map_err(|_| format!("ACRE2_VOICE_PORT is not a port: {p}"))?,
-        Err(_) => port,
+            .map_err(|_| format!("{name} is not a port: {p}"))?,
+        None => port,
     };
-    let address = std::env::var("ACRE2_VOICE_ADDRESS").unwrap_or(address);
+    let address = crate::runtime::env_var("VOICE_ADDRESS").map_or(address, |(_, a)| a);
     let address = address.trim().to_string();
     if address.is_empty() {
         return Err(
             "no voice server address set: players need the server's public IP or hostname \
-                    (CBA server setting, or ACRE2_VOICE_ADDRESS)"
+                    (CBA server setting, or YARD_VOICE_ADDRESS)"
                 .into(),
         );
     }

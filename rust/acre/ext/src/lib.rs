@@ -58,7 +58,7 @@ fn init_callbacks(ctx: Context) -> &'static str {
     callback::set_context(ctx);
     tracing::info!(
         version = env!("CARGO_PKG_VERSION"),
-        "ACRE extension initialised"
+        "YARD voice extension initialised"
     );
     version()
 }
